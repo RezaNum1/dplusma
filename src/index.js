@@ -29,8 +29,11 @@ async function startServer() {
 
     server.applyMiddleware({ app, path: "/graphql", cors: true });
 
-    app.listen({ port: 4000 }, () => {
+    app.listen({ port: 80 }, () => {
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+    })
+    app.get('/', (req,res,next) => {
+        res.redirect('/graphql')
     })
 }
 
