@@ -12,32 +12,42 @@ generator client {
 
 model Pendonor {
   id  Int @default(autoincrement()) @id
-  firstName String?
-  lastName  String?
-  nik Int
-  phoneNumber Int
-  sex String?
-  bloodType String?
-  placeOfBirth  String?
-  dateOfBirth DateTime
-  donorCount  Int
-  domisiliProvinsi  String?
-  domisiliKotKab  String?
-  domisiliKelurahan String?
-  domisiliAddress String?
-  riwayatHamil  Boolean
-  riwayatCovid  Boolean
-  riwayatKeluhan  String?
-  riwayatKomorbid String?
-  riwayatDonor  String?
-  riwayatVaksin String?
-  riwayatGejalaKlinis String?
-  hospitalName  String?
-  pcrPositiveDate DateTime
-  pcrPositiveImg  String?
-  pcrNegativeDate DateTime
-  pcrNegativeImg  String?
-  activitys Activity[]
+  fullName String  @db.VarChar(50)
+  phoneNumber String  @db.VarChar(25)
+  email   String  @db.VarChar(62)
+  password  String  @db.VarChar(20)
+  pendonorDetail  PendonorDetail?
+  activity  Activity[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model PendonorDetail {
+  id  Int @default(autoincrement()) @id
+  pendonor    Pendonor    @relation(fields: [pendonorId], references: [id])
+  pendonorId  Int @unique 
+  nik String?  @db.VarChar(25)
+  sex String?  @db.VarChar(5)
+  bloodType String?  @db.VarChar(4)
+  placeOfBirth  String?  @db.VarChar(35)
+  dateOfBirth DateTime?
+  donorCount  Int?
+  domisiliProvinsi  String?  @db.VarChar(35)
+  domisiliKotKab  String? @db.VarChar(35)
+  domisiliKelurahan String?  @db.VarChar(35)
+  domisiliAddress String?  @db.VarChar(100)
+  riwayatHamil  Boolean?
+  riwayatCovid  Boolean?
+  riwayatKeluhan  String?  @db.VarChar(255)
+  riwayatKomorbid String?  @db.VarChar(255)
+  riwayatDonor  String?  @db.VarChar(255)
+  riwayatVaksin String?  @db.VarChar(255)
+  riwayatGejalaKlinis String?  @db.VarChar(255)
+  hospitalName  String?  @db.VarChar(50)
+  pcrPositiveDate DateTime? 
+  pcrPositiveImg  String?  @db.VarChar(255)
+  pcrNegativeDate DateTime?
+  pcrNegativeImg  String?  @db.VarChar(255)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -48,7 +58,7 @@ model Activity {
   branchId  Int
   pendonor  Pendonor  @relation(fields: [pendonorId], references: [id])
   pendonorId Int
-  donorType String?
+  donorType String  @db.VarChar(35)
   passForm  Boolean
   didSchedule Boolean @default(false)
   didInterview  Boolean @default(false)
@@ -65,7 +75,7 @@ model Activity {
   passBloodTestShow Boolean @default(false)
   didScheduleTestShow Boolean @default(false)
   didDonorShow  Boolean @default(false)
-  proofImg  String?
+  proofImg  String  @db.VarChar(255)
   passFormAt  DateTime
   didScheduleAt DateTime
   didInterviewAt  DateTime
@@ -78,14 +88,14 @@ model Activity {
 
 model Pmi {
   id  Int @default(autoincrement()) @id
-  branchName  String?
-  branchSize  String?
-  branchAddress String?
-  langitude String?
-  longitude String?
+  branchName  String  @db.VarChar(100)
+  branchSize  String  @db.VarChar(20)
+  branchAddress String  @db.VarChar(255)
+  langitude String  @db.VarChar(100)
+  longitude String  @db.VarChar(100)
   activitys Activity[]
   timeslots Timeslot[]
-  users User[]
+  adminPmi  AdminPmi[]
   createdAt DateTime  @default(now())
 }
 
@@ -93,20 +103,20 @@ model Timeslot {
   id Int @default(autoincrement()) @id
   branch  Pmi @relation(fields: [branchId], references: [id])
   branchId  Int
-  type  String?
-  timeSlot  String?
+  type  String  @db.VarChar(20)
+  timeSlot  String  @db.VarChar(50)
   totalSlot Int
   createdAt DateTime  @default(now())
 }
 
-model User {
+model AdminPmi {
   id  Int @default(autoincrement()) @id
   branch  Pmi @relation(fields: [branchId], references: [id])
   branchId  Int
-  name  String?
-  email String?
-  password  String?
-  role  String?
-  status  Boolean
+  fullname  String  @db.VarChar(50)
+  email String  @db.VarChar(65)
+  password  String  @db.VarChar(25)
+  role  String  @db.VarChar(30)
+  status  Boolean @default(true)
   createdAt DateTime  @default(now())
 }

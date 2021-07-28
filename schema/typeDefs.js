@@ -6,12 +6,22 @@ export const typeDefs = gql`
 
     type Pendonor {
         id: Int
-        firstName: String!
-        lastName: String!
-        nik: Int
+        fullName: String!
         phoneNumber: String!
-        sex: String!
-        bloodType: String!
+        email: String!
+        password: String!
+        pendonorDetail: PendonorDetail
+        activity: [Activity]
+        createdAt:  Date
+        updatedAt:  Date
+    }
+
+    type PendonorDetail {
+        id: Int
+        pendonorId: Pendonor
+        nik: String
+        sex: String
+        bloodType: String
         placeOfBirth: String
         dateOfBirth: Date
         donorCount: Int
@@ -34,6 +44,7 @@ export const typeDefs = gql`
         pcrNegativeImg: String
         activitys: [Activity]
         createdAt: Date
+        updatedAt: Date
     }
 
     type Activity {
@@ -77,7 +88,7 @@ export const typeDefs = gql`
         longitude: String
         activitys: [Activity]
         timeslots: [Timeslot]
-        users: [Users]
+        adminPmi: [AdminPmi]
         createdAt: Date
     }
 
@@ -90,7 +101,7 @@ export const typeDefs = gql`
         createdAt: Date
     }
 
-    type Users {
+    type AdminPmi {
         id: Int
         branchId: Pmi
         name: String
@@ -103,18 +114,22 @@ export const typeDefs = gql`
 
     type Query {
         getAllPendonor(id: Int): [Pendonor]
+        getPendonor(id: Int): Pendonor
+        getAllPendonorDetail(id: Int): [PendonorDetail]
         getAllPmi(id: Int): [Pmi]
+        getPmi(id: Int): Pmi
         getAllActivity(id: Int): [Activity]
         getAllTimeslot(id: Int): [Timeslot]
-        getAllUser(id: Int): [Users]
+        getAllAdminPmi(id: Int): [AdminPmi]
     }
 
     type Mutation {
-        addPendonor(
-            firstName: String,
-            lastName: String,
+        addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, createdAt:  Date, updatedAt:  Date): Pendonor
+        updatePendonor(id: Int, fullName: String, phoneNumber: String, email: String): Pendonor
+
+        addPendonorDetail(
+            pendonorId: Int,
             nik: Int,
-            phoneNumber: String,
             sex: String,
             bloodType: String,
             placeOfBirth: String,
@@ -137,17 +152,12 @@ export const typeDefs = gql`
             pcrPositiveImg: String,
             pcrNegativeDate: Date,
             pcrNegativeImg: String,
-            createdAt: Date
-        ): [Pendonor]
+            createdAt: Date,
+            updatedAt: Date
+        ): PendonorDetail
 
-        addPmi(
-            branchName: String,
-            branchSize: String,
-            branchAddress: String,
-            langitude: String,
-            longitude: String,
-            createdAt: Date
-        ): [Pmi]
+        addPmi(branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String, createdAt: Date): Pmi
+        updatePmi(id: Int!, branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String): Pmi
 
         addActivity(
             branchId: Int,
@@ -178,7 +188,7 @@ export const typeDefs = gql`
             passBloodTestAt: Date,
             didScheduleTestAt: Date,
             didDonorAt: Date
-        ): [Activity]
+        ): Activity
 
         addTimeslot(
             branchId: Int,
@@ -186,16 +196,17 @@ export const typeDefs = gql`
             timeSlot: String,
             totalSlot: Int,
             createdAt: Date
-        ): [Timeslot]
+        ): Timeslot
 
-        addUser(
+        addAdminPmi(
             branchId: Int,
             name: String,
             email: String,
             password: String,
             role: String,
             status: Boolean,
-            createdAt: Date
-        ): [Users]
+            createdAt: Date,
+            updatedAt: Date
+        ): AdminPmi
     }
 `;

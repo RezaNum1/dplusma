@@ -1,17 +1,22 @@
 import pendonorQueries from '../queries/pendonorQueries'
+import pendonorDetailQueries from '../queries/pendonorDetailQueries'
 import activityQueries from '../queries/activityQueries'
 import pmiQueries from '../queries/pmiQueries'
 import timeslotQueries from '../queries/timeslotQueries'
-import userQueries from '../queries/userQueries'
-import { knex } from "../connection/dbConnection"
+import adminPmiQueries from '../queries/adminPmiQueries'
 
 export const resolvers = {
     Query: {
         // ------- Pendonor
         getAllPendonor: () => pendonorQueries.getAllPendonor(),
+        getPendonor: (_, {id}) => pendonorQueries.getPendonor(id),
+
+        // ------- Pendonor
+        getAllPendonorDetail: () => pendonorDetailQueries.getAllPendonorDetail(),
 
         // ------- PMI
         getAllPmi: () => pmiQueries.getAllPmi(),
+        getPmi: (_, {id}) => pmiQueries.getPmi(id),
 
         // ------- Activity
         getAllActivity: () => activityQueries.getAllActivity(),
@@ -19,8 +24,8 @@ export const resolvers = {
         // ------- Timeslot
         getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
 
-        // ------- Users
-        getAllUser: () => userQueries.getAllUser()
+        // ------- AdminPmi
+        getAllAdminPmi: () => adminPmiQueries.getAllAdminPmi()
     },
     Mutation: {
         // ------- Pendonor
@@ -29,10 +34,25 @@ export const resolvers = {
             return newOne
         },
 
+        updatePendonor: async(_, cast) => {
+            const updateOne = await pendonorQueries.updatePendonor(cast);
+            return updateOne
+        },
+
+        // ------- Pendonor Detail
+        addPendonorDetail: async(_, cast) => {
+            const newOne = await pendonorDetailQueries.addPendonorDetail(cast);
+            return newOne
+        },
+
         // -------- PMI
         addPmi: async(_, cast) => {
             const newOne = await pmiQueries.addPmi(cast)
             return newOne
+        },
+        updatePmi: async(_, cast) => {
+            const updateOne = await pmiQueries.updatePmi(cast)
+            return updateOne
         },
 
         // -------- Activity
@@ -47,60 +67,10 @@ export const resolvers = {
             return newOne
         },
 
-        // -------- Users
-        addUser: async(_, cast) => {
-            const newOne = await userQueries.addUser(cast)
+        // -------- AdminPmi
+        addAdminPmi: async(_, cast) => {
+            const newOne = await adminPmiQueries.addAdminPmi(cast)
             return newOne
-        }
-    },
-    Pendonor: {
-        activitys: root => {
-            return knex("activity")
-            .whereIn("id", root.id)
-            .select("*");
-        }
-    },
-    Activity: {
-        pendonorId: root => {
-            return knex('pendonor')
-            .where("id", root.pendonorId)
-            .first()
-        },
-        branchId: root => {
-            return knex('pmi')
-            .where("id", root.branchId)
-            .first()
-        }
-    },
-    Pmi: {
-        activitys: root => {
-            return knex("activity")
-            .whereIn("id", root.id)
-            .select("*");
-        },
-        timeslots: root => {
-            return knex("timeslot")
-            .whereIn("id", root.id)
-            .select("*");
-        },
-        users: root => {
-            return knex("users")
-            .whereIn("id", root.id)
-            .select("*");
-        }
-    },
-    Timeslot: {
-        branchId: root => {
-            return knex('pmi')
-            .where("id", root.branchId)
-            .first()
-        }
-    },
-    Users: {
-        branchId: root => {
-            return knex('pmi')
-            .where("id", root.branchId)
-            .first()
         }
     }
 }
