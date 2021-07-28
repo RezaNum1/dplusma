@@ -10,28 +10,103 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id        Int      @default(autoincrement()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+model Pendonor {
+  id  Int @default(autoincrement()) @id
+  firstName String?
+  lastName  String?
+  nik Int
+  phoneNumber Int
+  sex String?
+  bloodType String?
+  placeOfBirth  String?
+  dateOfBirth DateTime
+  donorCount  Int
+  domisiliProvinsi  String?
+  domisiliKotKab  String?
+  domisiliKelurahan String?
+  domisiliAddress String?
+  riwayatHamil  Boolean
+  riwayatCovid  Boolean
+  riwayatKeluhan  String?
+  riwayatKomorbid String?
+  riwayatDonor  String?
+  riwayatVaksin String?
+  riwayatGejalaKlinis String?
+  hospitalName  String?
+  pcrPositiveDate DateTime
+  pcrPositiveImg  String?
+  pcrNegativeDate DateTime
+  pcrNegativeImg  String?
+  activitys Activity[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
-model Profile {
-  id     Int     @default(autoincrement()) @id
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model Activity {
+  id  Int @default(autoincrement()) @id
+  branch  Pmi @relation(fields: [branchId], references: [id])
+  branchId  Int
+  pendonor  Pendonor  @relation(fields: [pendonorId], references: [id])
+  pendonorId Int
+  donorType String?
+  passForm  Boolean
+  didSchedule Boolean @default(false)
+  didInterview  Boolean @default(false)
+  passInterview Boolean @default(false)
+  didBloodTest  Boolean @default(false)
+  passBloodTest Boolean @default(false)
+  didScheduleTest Boolean @default(false)
+  didDonor  Boolean @default(false)
+  passFormShow  Boolean
+  didScheduleShow Boolean @default(false)
+  didInterviewShow  Boolean @default(false)
+  passInterviewShow Boolean @default(false)
+  didBloodTestShow  Boolean @default(false)
+  passBloodTestShow Boolean @default(false)
+  didScheduleTestShow Boolean @default(false)
+  didDonorShow  Boolean @default(false)
+  proofImg  String?
+  passFormAt  DateTime
+  didScheduleAt DateTime
+  didInterviewAt  DateTime
+  passInterviewAt DateTime
+  didBloodTestAt  DateTime
+  passBloodTestAt DateTime
+  didScheduleTestAt  DateTime
+  didDonorAt  DateTime
+}
+
+model Pmi {
+  id  Int @default(autoincrement()) @id
+  branchName  String?
+  branchSize  String?
+  branchAddress String?
+  langitude String?
+  longitude String?
+  activitys Activity[]
+  timeslots Timeslot[]
+  users User[]
+  createdAt DateTime  @default(now())
+}
+
+model Timeslot {
+  id Int @default(autoincrement()) @id
+  branch  Pmi @relation(fields: [branchId], references: [id])
+  branchId  Int
+  type  String?
+  timeSlot  String?
+  totalSlot Int
+  createdAt DateTime  @default(now())
 }
 
 model User {
-  id      Int      @default(autoincrement()) @id
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+  id  Int @default(autoincrement()) @id
+  branch  Pmi @relation(fields: [branchId], references: [id])
+  branchId  Int
+  name  String?
+  email String?
+  password  String?
+  role  String?
+  status  Boolean
+  createdAt DateTime  @default(now())
 }

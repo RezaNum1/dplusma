@@ -22,11 +22,11 @@ export const typeDefs = gql`
         domisiliAddress: String
         riwayatHamil: Boolean
         riwayatCovid: Boolean
-        riwayatKeluhan: Boolean #[String]
-        riwayatKomorbid: Boolean #[String]
-        riwayatDonor: Boolean #[String]
-        riwayatVaksin: Boolean #[String]
-        riwayatGejalaKlinis: Boolean #[String]
+        riwayatKeluhan: String
+        riwayatKomorbid: String
+        riwayatDonor: String
+        riwayatVaksin: String
+        riwayatGejalaKlinis: String
         hospitalName: String
         pcrPositiveDate: Date
         pcrPositiveImg: String
