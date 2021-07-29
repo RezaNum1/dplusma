@@ -6,7 +6,32 @@ module.exports = {
     getAllTimeslot: function getAllTimeslot() {
         return prisma.timeslot.findMany()
     },
-    addTimeslot: function addTimeslot(cast) {
-        return
+    getTimeslot: function getTimeslot(id) {
+        return prisma.timeslot.findUnique({
+            where: {
+                id: id
+            }
+        })
+    },
+    addTimeslot: async function addTimeslot(cast) {
+        return await prisma.timeslot.create({
+            data: {
+                branchId: cast.branchId,
+                type: cast.type,
+                timeSlot: cast.timeSlot,
+                totalSlot: cast.totalSlot
+            }
+        })
+    },
+    updateTimeslot: async function updateTimeslot(cast) {
+        return await prisma.timeslot.update({
+            where: { id: cast.id },
+            data: {
+                branchId: cast.branchId,
+                type: cast.type,
+                timeSlot: cast.timeSlot,
+                totalSlot: cast.totalSlot
+            }
+        })
     }
 }

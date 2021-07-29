@@ -27,13 +27,14 @@ model PendonorDetail {
   pendonor    Pendonor    @relation(fields: [pendonorId], references: [id])
   pendonorId  Int @unique 
   nik String?  @db.VarChar(25)
-  sex String?  @db.VarChar(5)
+  sex String?  @db.VarChar(6)
   bloodType String?  @db.VarChar(4)
   placeOfBirth  String?  @db.VarChar(35)
-  dateOfBirth DateTime?
+  dateOfBirth DateTime? @db.Date
   donorCount  Int?
   domisiliProvinsi  String?  @db.VarChar(35)
   domisiliKotKab  String? @db.VarChar(35)
+  domisiliKecamatan String? @db.VarChar(35)
   domisiliKelurahan String?  @db.VarChar(35)
   domisiliAddress String?  @db.VarChar(100)
   riwayatHamil  Boolean?
@@ -44,9 +45,9 @@ model PendonorDetail {
   riwayatVaksin String?  @db.VarChar(255)
   riwayatGejalaKlinis String?  @db.VarChar(255)
   hospitalName  String?  @db.VarChar(50)
-  pcrPositiveDate DateTime? 
+  pcrPositiveDate DateTime? @db.Date
   pcrPositiveImg  String?  @db.VarChar(255)
-  pcrNegativeDate DateTime?
+  pcrNegativeDate DateTime? @db.Date
   pcrNegativeImg  String?  @db.VarChar(255)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -58,32 +59,32 @@ model Activity {
   branchId  Int
   pendonor  Pendonor  @relation(fields: [pendonorId], references: [id])
   pendonorId Int
-  donorType String  @db.VarChar(35)
-  passForm  Boolean
-  didSchedule Boolean @default(false)
-  didInterview  Boolean @default(false)
-  passInterview Boolean @default(false)
-  didBloodTest  Boolean @default(false)
-  passBloodTest Boolean @default(false)
-  didScheduleTest Boolean @default(false)
-  didDonor  Boolean @default(false)
-  passFormShow  Boolean
-  didScheduleShow Boolean @default(false)
-  didInterviewShow  Boolean @default(false)
-  passInterviewShow Boolean @default(false)
-  didBloodTestShow  Boolean @default(false)
-  passBloodTestShow Boolean @default(false)
-  didScheduleTestShow Boolean @default(false)
-  didDonorShow  Boolean @default(false)
-  proofImg  String  @db.VarChar(255)
-  passFormAt  DateTime
-  didScheduleAt DateTime
-  didInterviewAt  DateTime
-  passInterviewAt DateTime
-  didBloodTestAt  DateTime
-  passBloodTestAt DateTime
-  didScheduleTestAt  DateTime
-  didDonorAt  DateTime
+  donorType String?  @db.VarChar(35)
+  passForm  Boolean?
+  didSchedule Boolean? @default(false)
+  didInterview  Boolean? @default(false)
+  passInterview Boolean? @default(false)
+  didBloodTest  Boolean? @default(false)
+  passBloodTest Boolean? @default(false)
+  didScheduleTest Boolean? @default(false)
+  didDonor  Boolean? @default(false)
+  passFormShow  Boolean?
+  didScheduleShow Boolean? @default(false)
+  didInterviewShow  Boolean? @default(false)
+  passInterviewShow Boolean? @default(false)
+  didBloodTestShow  Boolean? @default(false)
+  passBloodTestShow Boolean? @default(false)
+  didScheduleTestShow Boolean? @default(false)
+  didDonorShow  Boolean? @default(false)
+  proofImg  String?  @db.VarChar(255)
+  passFormAt  DateTime?
+  didScheduleAt DateTime?
+  didInterviewAt  DateTime?
+  passInterviewAt DateTime?
+  didBloodTestAt  DateTime?
+  passBloodTestAt DateTime?
+  didScheduleTestAt  DateTime?
+  didDonorAt  DateTime?
 }
 
 model Pmi {

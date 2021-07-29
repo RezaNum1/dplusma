@@ -13,6 +13,7 @@ export const resolvers = {
 
         // ------- Pendonor
         getAllPendonorDetail: () => pendonorDetailQueries.getAllPendonorDetail(),
+        getPendonorDetail: (_, {id}) => pendonorDetailQueries.getPendonorDetail(id),
 
         // ------- PMI
         getAllPmi: () => pmiQueries.getAllPmi(),
@@ -20,12 +21,15 @@ export const resolvers = {
 
         // ------- Activity
         getAllActivity: () => activityQueries.getAllActivity(),
+        getActivity: (_, {id}) => activityQueries.getActivity(id),
 
         // ------- Timeslot
         getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
+        getTimeslot: (_, {id}) => timeslotQueries.getTimeslot(id),
 
         // ------- AdminPmi
-        getAllAdminPmi: () => adminPmiQueries.getAllAdminPmi()
+        getAllAdminPmi: () => adminPmiQueries.getAllAdminPmi(),
+        getAdminPmi: (_, {id}) => adminPmiQueries.getAdminPmi(id)
     },
     Mutation: {
         // ------- Pendonor
@@ -45,6 +49,11 @@ export const resolvers = {
             return newOne
         },
 
+        updatePendonorDetail: async(_, cast) => {
+            const updateOne = await pendonorDetailQueries.updatePendonorDetail(cast)
+            return updateOne
+        },
+
         // -------- PMI
         addPmi: async(_, cast) => {
             const newOne = await pmiQueries.addPmi(cast)
@@ -60,17 +69,29 @@ export const resolvers = {
             const newOne = await activityQueries.addActivity(cast)
             return newOne
         },
+        updateActivity: async(_, cast) => {
+            const updateOne = await activityQueries.updateActivity(cast)
+            return updateOne
+        },
 
         // -------- Timeslot
         addTimeslot: async(_, cast) => {
             const newOne = await timeslotQueries.addTimeslot(cast)
             return newOne
         },
+        updateTimeslot: async(_, cast) => {
+            const updateOne = await timeslotQueries.updateTimeslot(cast)
+            return updateOne
+        },
 
         // -------- AdminPmi
         addAdminPmi: async(_, cast) => {
             const newOne = await adminPmiQueries.addAdminPmi(cast)
             return newOne
+        },
+        updateAdminPmi: async(_, cast) => {
+            const updateOne = await adminPmiQueries.updateAdminPmi(cast)
+            return updateOne
         }
     }
 }
