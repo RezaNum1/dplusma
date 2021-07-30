@@ -5,20 +5,21 @@ export const typeDefs = gql`
     scalar Date
 
     type Pendonor {
-        id: Int
+        id: String
         fullName: String!
         phoneNumber: String!
         email: String!
         password: String!
-        pendonorDetail: PendonorDetail
-        activity: [Activity]
+        pendonorDetails: PendonorDetail
+        activitys: [Activity!]!
         createdAt:  Date
         updatedAt:  Date
     }
 
     type PendonorDetail {
-        id: Int
-        pendonorId: Pendonor
+        id: String
+        pendonor: Pendonor
+        pendonorId: String
         nik: String
         sex: String
         bloodType: String
@@ -47,9 +48,11 @@ export const typeDefs = gql`
     }
 
     type Activity {
-        id: Int
-        branchId: Pmi
-        pendonorId: Pendonor
+        id: String
+        branch: Pmi!
+        branchId: String!
+        pendonor: Pendonor
+        pendonorId: String!
         donorType: String
         passForm: Boolean
         didSchedule: Boolean
@@ -77,23 +80,24 @@ export const typeDefs = gql`
         didScheduleTestAt: Date
         didDonorAt: Date
     }
-
+    
     type Pmi {
-        id: Int
+        id: String
         branchName: String
         branchSize: String
         branchAddress: String
         langitude: String
         longitude: String
-        activitys: [Activity]
-        timeslots: [Timeslot]
-        adminPmi: [AdminPmi]
+        activitys: [Activity!]!
+        timeslots: [Timeslot!]!
+        adminPmis: [AdminPmi!]!
         createdAt: Date
     }
 
     type Timeslot {
-        id: Int
-        branchId: Pmi
+        id: String
+        branch: Pmi!
+        branchId: String!
         type: String
         timeSlot: String
         totalSlot: Int
@@ -101,8 +105,9 @@ export const typeDefs = gql`
     }
 
     type AdminPmi {
-        id: Int
-        branchId: Pmi
+        id: String
+        branch: Pmi!
+        branchId: String!
         fullname: String
         email: String
         password: String
@@ -112,37 +117,37 @@ export const typeDefs = gql`
     }
 
     type Query {
-        getAllPendonor(id: Int): [Pendonor]
-        getPendonor(id: Int): Pendonor
+        getAllPendonor: [Pendonor]
+        getPendonor(id: String): Pendonor
 
-        getAllPendonorDetail(id: Int): [PendonorDetail]
-        getPendonorDetail(id: Int): PendonorDetail
+        getAllPendonorDetail: [PendonorDetail]
+        getPendonorDetail(pendonorId: String): PendonorDetail
 
-        getAllPmi(id: Int): [Pmi]
-        getPmi(id: Int): Pmi
+        getAllPmi: [Pmi]
+        getPmi(id: String): Pmi
 
-        getAllActivity(id: Int): [Activity]
-        getActivity(id: Int): Activity
+        getAllActivity: [Activity]
+        getActivity(pendonorId: String): Activity
 
-        getAllTimeslot(id: Int): [Timeslot]
-        getTimeslot(id: Int): Timeslot
+        getAllTimeslot: [Timeslot]
+        getTimeslot(id: String): Timeslot
 
-        getAllAdminPmi(id: Int): [AdminPmi]
-        getAdminPmi(id: Int): AdminPmi
+        getAllAdminPmi: [AdminPmi]
+        getAdminPmi(id: String): AdminPmi
     }
 
     type Mutation {
         #Pendonor
         addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, createdAt:  Date, updatedAt:  Date): Pendonor
-        updatePendonor(id: Int, fullName: String, phoneNumber: String, email: String): Pendonor
+        updatePendonor(id: String, fullName: String, phoneNumber: String, email: String): Pendonor
 
         #PendonorDetail
-        addPendonorDetail(pendonorId: Int, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: String, donorCount: Int, domisiliProvinsi: String, 
+        addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: String, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, 
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
                         pcrPositiveDate: String, pcrPositiveImg: String, pcrNegativeDate: String, pcrNegativeImg: String
         ): PendonorDetail
-        updatePendonorDetail(pendonorId: Int, nik: Int, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
+        updatePendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, 
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
                         pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String
@@ -150,16 +155,16 @@ export const typeDefs = gql`
 
         #Pmi
         addPmi(branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String, createdAt: Date): Pmi
-        updatePmi(id: Int!, branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String): Pmi
+        updatePmi(id: String, branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String): Pmi
 
         #Activity
-        addActivity(branchId: Int, pendonorId: Int, donorType: String,passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
+        addActivity(branchId: String, pendonorId: String, donorType: String,passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
                     passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
                     didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
                     didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
         ): Activity
 
-        updateActivity(id: Int, branchId: Int, pendonorId: Int,donorType: String,passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
+        updateActivity(id: String, branchId: String, pendonorId: Int,donorType: String,passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
                     passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
                     didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
                     didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
@@ -167,7 +172,7 @@ export const typeDefs = gql`
 
         #Timeslot
         addTimeslot(
-            branchId: Int,
+            branchId: String,
             type: String,
             timeSlot: String,
             totalSlot: Int,
@@ -175,8 +180,8 @@ export const typeDefs = gql`
         ): Timeslot
 
         updateTimeslot(
-            id: Int
-            branchId: Int,
+            id: String
+            branchId: String,
             type: String,
             timeSlot: String,
             totalSlot: Int,
@@ -185,7 +190,7 @@ export const typeDefs = gql`
 
         #AdminPmi
         addAdminPmi(
-            branchId: Int,
+            branchId: String,
             fullname: String,
             email: String,
             password: String,
@@ -194,8 +199,8 @@ export const typeDefs = gql`
         ): AdminPmi
 
         updateAdminPmi(
-            id: Int
-            branchId: Int,
+            id: String
+            branchId: String,
             fullname: String,
             email: String,
             password: String,

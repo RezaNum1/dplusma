@@ -16,7 +16,7 @@ module.exports = {
     addTimeslot: async function addTimeslot(cast) {
         return await prisma.timeslot.create({
             data: {
-                branchId: cast.branchId,
+                branch: { connect: { id: cast.branchId } },
                 type: cast.type,
                 timeSlot: cast.timeSlot,
                 totalSlot: cast.totalSlot
@@ -27,7 +27,7 @@ module.exports = {
         return await prisma.timeslot.update({
             where: { id: cast.id },
             data: {
-                branchId: cast.branchId,
+                branch: { connect: { id: cast.branchId } },
                 type: cast.type,
                 timeSlot: cast.timeSlot,
                 totalSlot: cast.totalSlot

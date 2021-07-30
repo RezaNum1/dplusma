@@ -6,17 +6,17 @@ module.exports = {
     getAllPendonorDetail: function getAllPendonorDetail() {
         return prisma.pendonorDetail.findMany()
     },
-    getPendonorDetail: function getPendonorDetail(pendonorId) {
-        return prisma.pendonorDetail.findUnique({
+    getPendonorDetail: function getPendonorDetail(cast) {
+        return prisma.pendonorDetail.findFirst({
             where: {
-                id: pendonorId
+                pendonorId: cast.pendonorId
             }
         })
     },
     addPendonorDetail: async function addPendonorDetail(cast) {
         return await prisma.pendonorDetail.create({
             data: {
-                pendonorId: cast.pendonorId,
+                pendonor: { connect: { id: cast.pendonorId } },
                 nik: cast.nik,
                 sex: cast.sex,
                 bloodType: cast.bloodType,
@@ -47,7 +47,7 @@ module.exports = {
         return await prisma.pendonorDetail.update({
             where: { pendonorId: cast.pendonorId },
             data: {
-                pendonorId: cast.pendonorId,
+                pendonor: { connect: { id: parseInt(cast.pendonorId) } },
                 nik: cast.nik,
                 sex: cast.sex,
                 bloodType: cast.bloodType,

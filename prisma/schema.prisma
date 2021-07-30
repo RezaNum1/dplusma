@@ -11,7 +11,7 @@ generator client {
 }
 
 model Pendonor {
-  id  Int @default(autoincrement()) @id
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
   fullName String  @db.VarChar(50)
   phoneNumber String  @db.VarChar(25)
   email   String  @db.VarChar(62)
@@ -23,9 +23,9 @@ model Pendonor {
 }
 
 model PendonorDetail {
-  id  Int @default(autoincrement()) @id
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
   pendonor    Pendonor    @relation(fields: [pendonorId], references: [id])
-  pendonorId  Int @unique 
+  pendonorId  String
   nik String?  @db.VarChar(25)
   sex String?  @db.VarChar(6)
   bloodType String?  @db.VarChar(4)
@@ -54,11 +54,11 @@ model PendonorDetail {
 }
 
 model Activity {
-  id  Int @default(autoincrement()) @id
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
   branch  Pmi @relation(fields: [branchId], references: [id])
-  branchId  Int
+  branchId  String
   pendonor  Pendonor  @relation(fields: [pendonorId], references: [id])
-  pendonorId Int
+  pendonorId String
   donorType String?  @db.VarChar(35)
   passForm  Boolean?
   didSchedule Boolean? @default(false)
@@ -88,7 +88,7 @@ model Activity {
 }
 
 model Pmi {
-  id  Int @default(autoincrement()) @id
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
   branchName  String  @db.VarChar(100)
   branchSize  String  @db.VarChar(20)
   branchAddress String  @db.VarChar(255)
@@ -101,9 +101,9 @@ model Pmi {
 }
 
 model Timeslot {
-  id Int @default(autoincrement()) @id
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
   branch  Pmi @relation(fields: [branchId], references: [id])
-  branchId  Int
+  branchId  String
   type  String  @db.VarChar(20)
   timeSlot  String  @db.VarChar(50)
   totalSlot Int
@@ -111,13 +111,15 @@ model Timeslot {
 }
 
 model AdminPmi {
-  id  Int @default(autoincrement()) @id
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
   branch  Pmi @relation(fields: [branchId], references: [id])
-  branchId  Int
+  branchId  String
   fullname  String  @db.VarChar(50)
   email String  @db.VarChar(65)
   password  String  @db.VarChar(25)
   role  String  @db.VarChar(30)
   status  Boolean @default(true)
   createdAt DateTime  @default(now())
+
+  @@unique([branchId])
 }

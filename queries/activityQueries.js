@@ -6,18 +6,18 @@ module.exports = {
     getAllActivity: function getAllActivity() {
         return prisma.activity.findMany()
     },
-    getActivity: function getActivity(id) {
-        return prisma.activity.findUnique({
+    getActivity: function getActivity(cast) {
+        return prisma.activity.findFirst({
             where: {
-                id: id
+                pendonorId: cast.pendonorId
             }
         })
     },
     addActivity: async function addActivity(cast) {
         return await prisma.activity.create({
             data: {
-                branchId: cast.branchId,
-                pendonorId: cast.pendonorId,
+                branch: { connect: { id: cast.branchId } },
+                pendonor: { connect: { id: cast.pendonorId } },
                 donorType: cast.donorType,
                 passForm: cast.passForm,
                 didSchedule: cast.didSchedule,
@@ -53,8 +53,8 @@ module.exports = {
                 id: cast.id
             },
             data: {
-                pendonorId: cast.pendonorId,
-                branchId: cast.branchId,
+                branch: { connect: { id: cast.branchId } },
+                pendonor: { connect: { id: cast.pendonorId } },
                 donorType: cast.donorType,
                 passForm: cast.passForm,
                 didSchedule: cast.didSchedule,

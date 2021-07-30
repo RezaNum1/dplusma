@@ -7,16 +7,18 @@ module.exports = {
         return prisma.adminPmi.findMany()
     },
     getAdminPmi: function getAdminPmi(id) {
-        return prisma.adminPmi.findUnique({
+        const data = prisma.adminPmi.findUnique({
             where: {
                 id: id
             }
         })
+
+        return data
     },
     addAdminPmi: async function addAdminPmi(cast) {
         return await prisma.adminPmi.create({
             data: {
-                branchId: cast.branchId,
+                branch: { connect: { id: cast.branchId } },
                 fullname: cast.fullname,
                 email: cast.email,
                 password: cast.password,
@@ -31,7 +33,7 @@ module.exports = {
                 id: cast.id
             },
             data: {
-                branchId: cast.branchId,
+                branch: { connect: { id: cast.branchId } },
                 fullname: cast.fullname,
                 email: cast.email,
                 password: cast.password,
