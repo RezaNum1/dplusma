@@ -6,10 +6,25 @@ module.exports = {
     getAllTimeslot: function getAllTimeslot() {
         return prisma.timeslot.findMany()
     },
-    getTimeslot: function getTimeslot(id) {
+    getTimeslotById: function getTimeslotById(cast) {
         return prisma.timeslot.findUnique({
             where: {
-                id: id
+                id: cast.id
+            }
+        })
+    },
+    getTimeslotByBranch: function getTimeslotByBranch(cast) {
+        return prisma.timeslot.findMany({
+            where: {
+                branchId: cast.branchId
+            }
+        })
+    },
+    getTimeslotByIdAndBranch: function getTimeslotByIdAndBranch(cast) {
+        return prisma.timeslot.findFirst({
+            where: {
+                id: cast.id,
+                branchId: cast.branchId
             }
         })
     },

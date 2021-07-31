@@ -47,7 +47,7 @@ module.exports = {
         return await prisma.pendonorDetail.update({
             where: { pendonorId: cast.pendonorId },
             data: {
-                pendonor: { connect: { id: parseInt(cast.pendonorId) } },
+                pendonor: { connect: { id: cast.pendonorId } },
                 nik: cast.nik,
                 sex: cast.sex,
                 bloodType: cast.bloodType,

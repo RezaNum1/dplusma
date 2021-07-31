@@ -6,10 +6,29 @@ module.exports = {
     getAllAdminPmi: function getAllAdminPmi() {
         return prisma.adminPmi.findMany()
     },
-    getAdminPmi: function getAdminPmi(id) {
+    getAdminPmiById: function getAdminPmiById(cast) {
         const data = prisma.adminPmi.findUnique({
             where: {
-                id: id
+                id: cast.id
+            }
+        })
+
+        return data
+    },
+    getAdminPmiByBranch: function getAdminPmiByBranch(cast) {
+        const data = prisma.adminPmi.findMany({
+            where: {
+                branchId: cast.branchId
+            }
+        })
+
+        return data
+    },
+    getAdminPmiByIdAndBranch: function getAdminPmiByIdAndBranch(cast){
+        const data = prisma.adminPmi.findFirst({
+            where: {
+                id: cast.id,
+                branchId: cast.branchId
             }
         })
 

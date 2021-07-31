@@ -130,10 +130,14 @@ export const typeDefs = gql`
         getActivity(pendonorId: String): Activity
 
         getAllTimeslot: [Timeslot]
-        getTimeslot(id: String): Timeslot
+        getTimeslotById(id: String): Timeslot
+        getTimeslotByBranch(branchId: String): [Timeslot]
+        getTimeslotByIdAndBranch(id: String, branchId: String): Timeslot
 
         getAllAdminPmi: [AdminPmi]
-        getAdminPmi(id: String): AdminPmi
+        getAdminPmiById(id: String): AdminPmi
+        getAdminPmiByBranch(branchId: String): [AdminPmi]
+        getAdminPmiByIdAndBranch(id: String, branchId: String): AdminPmi
     }
 
     type Mutation {

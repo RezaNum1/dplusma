@@ -26,13 +26,17 @@ export const resolvers = {
         getAllActivity: () => activityQueries.getAllActivity(),
         getActivity: (_, cast) => activityQueries.getActivity(cast),
 
-        // ------- Timeslot
+        // ------- Timeslot 
         getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
-        getTimeslot: (_, {id}) => timeslotQueries.getTimeslot(id),
+        getTimeslotById: (_, cast) => timeslotQueries.getTimeslotById(cast),
+        getTimeslotByBranch: (_, cast) => timeslotQueries.getTimeslotByBranch(cast),
+        getTimeslotByIdAndBranch: (_, cast) => timeslotQueries.getTimeslotByIdAndBranch(cast),
 
-        // ------- AdminPmi
+        // ------- AdminPmi 
         getAllAdminPmi: () => adminPmiQueries.getAllAdminPmi(),
-        getAdminPmi: (_, {id}) => adminPmiQueries.getAdminPmi(id)
+        getAdminPmiById: (_, cast) => adminPmiQueries.getAdminPmiById(cast),
+        getAdminPmiByBranch: (_, cast) => adminPmiQueries.getAdminPmiByBranch(cast),
+        getAdminPmiByIdAndBranch: (_, cast) => adminPmiQueries.getAdminPmiByIdAndBranch(cast),
     },
     Mutation: {
         // ------- Pendonor
@@ -99,7 +103,7 @@ export const resolvers = {
     },
     Pendonor: {
         pendonorDetails: (parent, args, context) => {
-            return prisma.pendonorDetail.findUnique({
+            return prisma.pendonorDetail.findFirst({
                 where: { pendonorId: parent.id }
             })
         },

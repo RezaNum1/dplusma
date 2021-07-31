@@ -120,6 +120,4 @@ model AdminPmi {
   role  String  @db.VarChar(30)
   status  Boolean @default(true)
   createdAt DateTime  @default(now())
-
-  @@unique([branchId])
 }
