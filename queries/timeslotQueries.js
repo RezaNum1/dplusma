@@ -42,7 +42,6 @@ module.exports = {
         return await prisma.timeslot.update({
             where: { id: cast.id },
             data: {
-                branch: { connect: { id: cast.branchId } },
                 type: cast.type,
                 timeSlot: cast.timeSlot,
                 totalSlot: cast.totalSlot

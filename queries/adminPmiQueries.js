@@ -52,7 +52,6 @@ module.exports = {
                 id: cast.id
             },
             data: {
-                branch: { connect: { id: cast.branchId } },
                 fullname: cast.fullname,
                 email: cast.email,
                 password: cast.password,

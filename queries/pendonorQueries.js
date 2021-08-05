@@ -20,6 +20,7 @@ module.exports = {
                 email: cast.email,
                 password: cast.password,
                 phoneNumber: cast.phoneNumber,
+                occupation: cast.occupation
             }
         })
     },
@@ -30,6 +31,7 @@ module.exports = {
                 fullName: cast.fullName,
                 email: cast.email,
                 phoneNumber: cast.phoneNumber,
+                occupation: cast.occupation
             }
         })
     }

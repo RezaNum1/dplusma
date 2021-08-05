@@ -10,6 +10,7 @@ export const typeDefs = gql`
         phoneNumber: String!
         email: String!
         password: String!
+        occupation: String!
         pendonorDetails: PendonorDetail
         activitys: [Activity!]!
         createdAt:  Date
@@ -49,11 +50,13 @@ export const typeDefs = gql`
 
     type Activity {
         id: String
-        branch: Pmi!
-        branchId: String!
+        branch: Pmi
+        branchId: String
         pendonor: Pendonor
-        pendonorId: String!
+        pendonorId: String
         donorType: String
+        interviewNotes: String
+        antibodyLevel:  String
         passForm: Boolean
         didSchedule: Boolean
         didInterview: Boolean
@@ -86,6 +89,8 @@ export const typeDefs = gql`
         branchName: String
         branchSize: String
         branchAddress: String
+        phoneNumber: String
+        availability: String
         langitude: String
         longitude: String
         activitys: [Activity!]!
@@ -142,8 +147,8 @@ export const typeDefs = gql`
 
     type Mutation {
         #Pendonor
-        addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, createdAt:  Date, updatedAt:  Date): Pendonor
-        updatePendonor(id: String, fullName: String, phoneNumber: String, email: String): Pendonor
+        addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, createdAt:  Date, updatedAt:  Date): Pendonor
+        updatePendonor(id: String, fullName: String, phoneNumber: String, email: String, occupation: String): Pendonor
 
         #PendonorDetail
         addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: String, donorCount: Int, domisiliProvinsi: String, 
@@ -151,24 +156,25 @@ export const typeDefs = gql`
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
                         pcrPositiveDate: String, pcrPositiveImg: String, pcrNegativeDate: String, pcrNegativeImg: String
         ): PendonorDetail
-        updatePendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
+        updatePendonorDetail(nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, 
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
                         pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String
         ): PendonorDetail
 
         #Pmi
-        addPmi(branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String, createdAt: Date): Pmi
-        updatePmi(id: String, branchName: String, branchSize: String, branchAddress: String, langitude: String, longitude: String): Pmi
+        addPmi(branchName: String, branchSize: String, branchAddress: String, phoneNumber: String, availability: String, langitude: String, longitude: String, createdAt: Date): Pmi
+        updatePmi(id: String, branchName: String, branchSize: String, branchAddress: String, phoneNumber: String, availability: String, langitude: String, longitude: String): Pmi
 
-        #Activity
-        addActivity(branchId: String, pendonorId: String, donorType: String,passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
+        #Activity        
+        addActivity(donorType: String, interviewNotes: String, antibodyLevel: String,
+                    passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
                     passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
                     didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
                     didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
         ): Activity
 
-        updateActivity(id: String, branchId: String, pendonorId: Int,donorType: String,passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
+        updateActivity(id: String, donorType: String, interviewNotes: String, antibodyLevel: String, passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
                     passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
                     didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
                     didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
@@ -185,7 +191,6 @@ export const typeDefs = gql`
 
         updateTimeslot(
             id: String
-            branchId: String,
             type: String,
             timeSlot: String,
             totalSlot: Int,
@@ -204,7 +209,6 @@ export const typeDefs = gql`
 
         updateAdminPmi(
             id: String
-            branchId: String,
             fullname: String,
             email: String,
             password: String,

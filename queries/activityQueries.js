@@ -19,6 +19,8 @@ module.exports = {
                 branch: { connect: { id: cast.branchId } },
                 pendonor: { connect: { id: cast.pendonorId } },
                 donorType: cast.donorType,
+                interviewNotes: cast.interviewNotes,
+                antibodyLevel:  cast.antibodyLevel,
                 passForm: cast.passForm,
                 didSchedule: cast.didSchedule,
                 didInterview: cast.didInterview,
@@ -53,9 +55,9 @@ module.exports = {
                 id: cast.id
             },
             data: {
-                branch: { connect: { id: cast.branchId } },
-                pendonor: { connect: { id: cast.pendonorId } },
                 donorType: cast.donorType,
+                interviewNotes: cast.interviewNotes,
+                antibodyLevel:  cast.antibodyLevel,
                 passForm: cast.passForm,
                 didSchedule: cast.didSchedule,
                 didInterview: cast.didInterview,

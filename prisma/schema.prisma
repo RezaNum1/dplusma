@@ -16,6 +16,7 @@ model Pendonor {
   phoneNumber String  @db.VarChar(25)
   email   String  @db.VarChar(62)
   password  String  @db.VarChar(20)
+  occupation  String  @db.VarChar(100)
   pendonorDetail  PendonorDetail?
   activity  Activity[]
   createdAt DateTime  @default(now())
@@ -60,6 +61,8 @@ model Activity {
   pendonor  Pendonor  @relation(fields: [pendonorId], references: [id])
   pendonorId String
   donorType String?  @db.VarChar(35)
+  interviewNotes  String?  @db.VarChar(255)
+  antibodyLevel  String?  @db.VarChar(100)
   passForm  Boolean?
   didSchedule Boolean? @default(false)
   didInterview  Boolean? @default(false)
@@ -92,6 +95,8 @@ model Pmi {
   branchName  String  @db.VarChar(100)
   branchSize  String  @db.VarChar(20)
   branchAddress String  @db.VarChar(255)
+  phoneNumber String  @db.VarChar(25)
+  availability String @db.VarChar(50)
   langitude String  @db.VarChar(100)
   longitude String  @db.VarChar(100)
   activitys Activity[]

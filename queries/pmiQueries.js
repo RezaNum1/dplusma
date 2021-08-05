@@ -19,6 +19,8 @@ module.exports = {
                 branchName: cast.branchName,
                 branchAddress: cast.branchAddress,
                 branchSize: cast.branchSize,
+                phoneNumber: cast.phoneNumber,
+                availability: cast.availability,
                 langitude: cast.langitude,
                 longitude: cast.longitude,
                 timeslots: cast.timeslots
@@ -32,6 +34,8 @@ module.exports = {
                 branchName: cast.branchName,
                 branchAddress: cast.branchAddress,
                 branchSize: cast.branchSize,
+                phoneNumber: cast.phoneNumber,
+                availability: cast.availability,
                 langitude: cast.langitude,
                 longitude: cast.longitude,
                 timeslots: cast.timeslots
