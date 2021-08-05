@@ -13,6 +13,33 @@ module.exports = {
             }
         })
     },
+    getActivityForInterview: function getActivityForInterview() {
+        return prisma.activity.findMany({
+            where: {
+                passForm: true,
+                didSchedule: true,
+                didInterview: false
+            }
+        })
+    },
+    getActivityForBloodTest: function getActivityForBloodTest() {
+        return prisma.activity.findMany({
+            where: {
+                didInterview: true,
+                passInterview: true,
+                didBloodTest: false
+            }
+        })
+    },
+    getActivityForDonor: function getActivityForDonor() {
+        return prisma.activity.findMany({
+            where: {
+                didBloodTest: true,
+                passBloodTest: true,
+                didDonor: false
+            }
+        })
+    },
     addActivity: async function addActivity(cast) {
         return await prisma.activity.create({
             data: {

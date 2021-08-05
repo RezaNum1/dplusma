@@ -133,6 +133,9 @@ export const typeDefs = gql`
 
         getAllActivity: [Activity]
         getActivity(pendonorId: String): Activity
+        getActivityForInterview: [Activity]
+        getActivityForBloodTest: [Activity]
+        getActivityForDonor: [Activity]
 
         getAllTimeslot: [Timeslot]
         getTimeslotById(id: String): Timeslot

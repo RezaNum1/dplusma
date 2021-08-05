@@ -25,6 +25,9 @@ export const resolvers = {
         // ------- Activity
         getAllActivity: () => activityQueries.getAllActivity(),
         getActivity: (_, cast) => activityQueries.getActivity(cast),
+        getActivityForInterview: () => activityQueries.getActivityForInterview(), 
+        getActivityForBloodTest: () => activityQueries.getActivityForBloodTest(),
+        getActivityForDonor: () => activityQueries.getActivityForDonor(),
 
         // ------- Timeslot 
         getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
