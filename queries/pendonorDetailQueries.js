@@ -45,7 +45,7 @@ module.exports = {
     },
     updatePendonorDetail: async function updatePendonorDetail(cast) {
         return await prisma.pendonorDetail.update({
-            where: { pendonorId: cast.pendonorId },
+            where: { id: cast.id },
             data: {
                 nik: cast.nik,
                 sex: cast.sex,

@@ -63,7 +63,7 @@ model Activity {
   donorType String?  @db.VarChar(35)
   interviewNotes  String?  @db.VarChar(255)
   antibodyLevel  String?  @db.VarChar(100)
-  passForm  Boolean?
+  passForm  Boolean?  @default(false)
   didSchedule Boolean? @default(false)
   didInterview  Boolean? @default(false)
   passInterview Boolean? @default(false)
@@ -71,7 +71,8 @@ model Activity {
   passBloodTest Boolean? @default(false)
   didScheduleTest Boolean? @default(false)
   didDonor  Boolean? @default(false)
-  passFormShow  Boolean?
+  processState  Boolean? @default(false)
+  passFormShow  Boolean?  @default(false)
   didScheduleShow Boolean? @default(false)
   didInterviewShow  Boolean? @default(false)
   passInterviewShow Boolean? @default(false)

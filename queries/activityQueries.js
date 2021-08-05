@@ -56,6 +56,7 @@ module.exports = {
                 passBloodTest: cast.passBloodTest,
                 didScheduleTest: cast.didScheduleTest,
                 didDonor: cast.didDonor,
+                processState: cast.processState,
                 passFormShow: cast.passFormShow,
                 didScheduleShow: cast.didScheduleShow,
                 didInterviewShow: cast.didInterviewShow,
@@ -70,7 +71,7 @@ module.exports = {
                 didInterviewAt: cast.didInterviewAt,
                 passInterviewAt: cast.passInterviewAt,
                 didBloodTestAt: cast.didBloodTestAt,
-                passBloodTestAt: cast.passBloodTest,
+                passBloodTestAt: cast.passBloodTestAt,
                 didScheduleTestAt: cast.didScheduleTestAt,
                 didDonorAt: cast.didDonorAt
             }
@@ -93,6 +94,7 @@ module.exports = {
                 passBloodTest: cast.passBloodTest,
                 didScheduleTest: cast.didScheduleTest,
                 didDonor: cast.didDonor,
+                processState: cast.processState,
                 passFormShow: cast.passFormShow,
                 didScheduleShow: cast.didScheduleShow,
                 didInterviewShow: cast.didInterviewShow,
@@ -107,7 +109,7 @@ module.exports = {
                 didInterviewAt: cast.didInterviewAt,
                 passInterviewAt: cast.passInterviewAt,
                 didBloodTestAt: cast.didBloodTestAt,
-                passBloodTestAt: cast.passBloodTest,
+                passBloodTestAt: cast.passBloodTestAt,
                 didScheduleTestAt: cast.didScheduleTestAt,
                 didDonorAt: cast.didDonorAt
             }

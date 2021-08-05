@@ -65,6 +65,7 @@ export const typeDefs = gql`
         passBloodTest: Boolean
         didScheduleTest: Boolean
         didDonor: Boolean
+        processState: Boolean
         passFormShow: Boolean
         didScheduleShow: Boolean
         didInterviewShow: Boolean
@@ -159,7 +160,7 @@ export const typeDefs = gql`
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
                         pcrPositiveDate: String, pcrPositiveImg: String, pcrNegativeDate: String, pcrNegativeImg: String
         ): PendonorDetail
-        updatePendonorDetail(nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
+        updatePendonorDetail(id: String, pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, 
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
                         pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String
@@ -171,16 +172,16 @@ export const typeDefs = gql`
 
         #Activity        
         addActivity(branchId: String, pendonorId: String, donorType: String, interviewNotes: String, antibodyLevel: String,
-                    passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
-                    passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
+                    passForm: Boolean,didSchedule: Boolean, didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
+                    passBloodTest: Boolean,didScheduleTest: Boolean, didDonor: Boolean, processState: Boolean, passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
                     didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
-                    didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
+                    didInterviewAt: Date, passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
         ): Activity
 
         updateActivity(id: String, donorType: String, interviewNotes: String, antibodyLevel: String, passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
-                    passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
-                    didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
-                    didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
+                    passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean, processState: Boolean, passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
+                    didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String, passFormAt: Date, didScheduleAt: Date,
+                    didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date, didScheduleTestAt: Date,didDonorAt: Date
         ): Activity
 
         #Timeslot
