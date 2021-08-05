@@ -170,7 +170,7 @@ export const typeDefs = gql`
         updatePmi(id: String, branchName: String, branchSize: String, branchAddress: String, phoneNumber: String, availability: String, langitude: String, longitude: String): Pmi
 
         #Activity        
-        addActivity(donorType: String, interviewNotes: String, antibodyLevel: String,
+        addActivity(branchId: String, pendonorId: String, donorType: String, interviewNotes: String, antibodyLevel: String,
                     passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
                     passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean,passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
                     didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
