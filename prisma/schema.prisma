@@ -31,7 +31,7 @@ model PendonorDetail {
   sex String?  @db.VarChar(6)
   bloodType String?  @db.VarChar(4)
   placeOfBirth  String?  @db.VarChar(35)
-  dateOfBirth DateTime? @db.Date
+  dateOfBirth DateTime?
   donorCount  Int?
   domisiliProvinsi  String?  @db.VarChar(35)
   domisiliKotKab  String? @db.VarChar(35)
@@ -46,9 +46,9 @@ model PendonorDetail {
   riwayatVaksin String?  @db.VarChar(255)
   riwayatGejalaKlinis String?  @db.VarChar(255)
   hospitalName  String?  @db.VarChar(50)
-  pcrPositiveDate DateTime? @db.Date
+  pcrPositiveDate DateTime?
   pcrPositiveImg  String?  @db.VarChar(255)
-  pcrNegativeDate DateTime? @db.Date
+  pcrNegativeDate DateTime?
   pcrNegativeImg  String?  @db.VarChar(255)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

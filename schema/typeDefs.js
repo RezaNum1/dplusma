@@ -25,7 +25,7 @@ export const typeDefs = gql`
         sex: String
         bloodType: String
         placeOfBirth: String
-        dateOfBirth: String
+        dateOfBirth: Date
         donorCount: Int
         domisiliProvinsi: String
         domisiliKotKab: String
@@ -40,9 +40,9 @@ export const typeDefs = gql`
         riwayatVaksin: String
         riwayatGejalaKlinis: String
         hospitalName: String
-        pcrPositiveDate: String
+        pcrPositiveDate: Date
         pcrPositiveImg: String
-        pcrNegativeDate: String
+        pcrNegativeDate: Date
         pcrNegativeImg: String
         createdAt: Date
         updatedAt: Date
@@ -156,10 +156,10 @@ export const typeDefs = gql`
         updatePendonor(id: String, fullName: String, phoneNumber: String, email: String, occupation: String): Pendonor
 
         #PendonorDetail
-        addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: String, donorCount: Int, domisiliProvinsi: String, 
+        addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, 
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
-                        pcrPositiveDate: String, pcrPositiveImg: String, pcrNegativeDate: String, pcrNegativeImg: String
+                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String
         ): PendonorDetail
         updatePendonorDetail(id: String, pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, 
