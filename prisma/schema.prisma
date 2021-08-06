@@ -40,6 +40,7 @@ model PendonorDetail {
   domisiliAddress String?  @db.VarChar(100)
   riwayatHamil  Boolean?
   riwayatCovid  Boolean?
+  riwayatTransfusi  Boolean?
   riwayatKeluhan  String?  @db.VarChar(255)
   riwayatKomorbid String?  @db.VarChar(255)
   riwayatDonor  String?  @db.VarChar(255)
