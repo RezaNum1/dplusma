@@ -125,6 +125,7 @@ export const typeDefs = gql`
     type Query {
         getAllPendonor: [Pendonor]
         getPendonor(id: String): Pendonor
+        getPendonorByEmail(email: String): Pendonor
 
         getAllPendonorDetail: [PendonorDetail]
         getPendonorDetail(pendonorId: String): PendonorDetail

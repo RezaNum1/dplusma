@@ -13,6 +13,13 @@ module.exports = {
             }
         })
     },
+    getPendonorByEmail: function getPendonorByEmail(email) {
+        return prisma.pendonor.findFirst({
+            where: {
+                email: email
+            }
+        })
+    },
     addPendonor: async function addPendonor(cast) {
         return await prisma.pendonor.create({
             data: {

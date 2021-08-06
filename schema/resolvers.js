@@ -13,6 +13,7 @@ export const resolvers = {
         // ------- Pendonor
         getAllPendonor: () => pendonorQueries.getAllPendonor(),
         getPendonor: (_, {id}) => pendonorQueries.getPendonor(id),
+        getPendonorByEmail: (_, {email}) => pendonorQueries.getPendonorByEmail(email),
 
         // ------- Pendonor
         getAllPendonorDetail: () => pendonorDetailQueries.getAllPendonorDetail(),
