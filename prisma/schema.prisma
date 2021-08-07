@@ -28,7 +28,7 @@ model PendonorDetail {
   pendonor    Pendonor    @relation(fields: [pendonorId], references: [id])
   pendonorId  String
   nik String?  @db.VarChar(25)
-  sex String?  @db.VarChar(6)
+  sex String?  @db.VarChar(15)
   bloodType String?  @db.VarChar(4)
   placeOfBirth  String?  @db.VarChar(35)
   dateOfBirth DateTime?
