@@ -3,7 +3,8 @@ import { gql } from 'apollo-server-express'
 export const typeDefs = gql`
 
     scalar Date
-
+    scalar JSON
+    
     type Pendonor {
         id: String
         fullName: String!

@@ -5,10 +5,12 @@ import pmiQueries from '../queries/pmiQueries'
 import timeslotQueries from '../queries/timeslotQueries'
 import adminPmiQueries from '../queries/adminPmiQueries'
 import { PrismaClient } from "@prisma/client"
+const GraphQLJSON = require('graphql-type-json');
 
 const prisma = new PrismaClient();
 
 export const resolvers = {
+    JSON: GraphQLJSON,
     Query: {
         // ------- Pendonor
         getAllPendonor: () => pendonorQueries.getAllPendonor(),
