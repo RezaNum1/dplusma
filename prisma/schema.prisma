@@ -73,14 +73,6 @@ model Activity {
   didScheduleTest Boolean? @default(false)
   didDonor  Boolean? @default(false)
   processState  Boolean? @default(false)
-  passFormShow  Boolean?  @default(false)
-  didScheduleShow Boolean? @default(false)
-  didInterviewShow  Boolean? @default(false)
-  passInterviewShow Boolean? @default(false)
-  didBloodTestShow  Boolean? @default(false)
-  passBloodTestShow Boolean? @default(false)
-  didScheduleTestShow Boolean? @default(false)
-  didDonorShow  Boolean? @default(false)
   proofImg  String?  @db.VarChar(255)
   passFormAt  DateTime?
   didScheduleAt DateTime?

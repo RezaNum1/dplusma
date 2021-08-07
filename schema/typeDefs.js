@@ -67,14 +67,6 @@ export const typeDefs = gql`
         didScheduleTest: Boolean
         didDonor: Boolean
         processState: Boolean
-        passFormShow: Boolean
-        didScheduleShow: Boolean
-        didInterviewShow: Boolean
-        passInterviewShow: Boolean
-        didBloodTestShow: Boolean
-        passBloodTestShow: Boolean
-        didScheduleTestShow: Boolean
-        didDonorShow: Boolean
         proofImg: String
         passFormAt: Date
         didScheduleAt: Date
