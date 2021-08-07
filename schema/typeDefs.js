@@ -3,7 +3,8 @@ import { gql } from 'apollo-server-express'
 export const typeDefs = gql`
 
     scalar Date
-
+    scalar JSON
+    
     type Pendonor {
         id: String
         fullName: String!
@@ -101,14 +102,18 @@ export const typeDefs = gql`
         createdAt: Date
     }
 
+#    type Timeslot {
+#        id: String
+#        branch: Pmi!
+#        branchId: String!
+#        type: String
+#        timeSlot: String
+#        totalSlot: Int
+#        createdAt: Date
+#    }
+
     type Timeslot {
-        id: String
-        branch: Pmi!
-        branchId: String!
-        type: String
-        timeSlot: String
-        totalSlot: Int
-        createdAt: Date
+        field: JSON
     }
 
     type AdminPmi {
