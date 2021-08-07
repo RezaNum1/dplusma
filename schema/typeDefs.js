@@ -84,6 +84,8 @@ export const typeDefs = gql`
         passBloodTestAt: Date
         didScheduleTestAt: Date
         didDonorAt: Date
+        createdAt: Date
+        updatedAt: Date
     }
     
     type Pmi {

@@ -90,6 +90,8 @@ model Activity {
   passBloodTestAt DateTime?
   didScheduleTestAt  DateTime?
   didDonorAt  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Pmi {
