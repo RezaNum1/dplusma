@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express'
 export const typeDefs = gql`
 
     scalar Date
+    scalar JSON
 
     type Pendonor {
         id: String
@@ -11,6 +12,7 @@ export const typeDefs = gql`
         email: String!
         password: String!
         occupation: String!
+        identifier: String
         pendonorDetails: PendonorDetail
         activitys: [Activity!]!
         createdAt:  Date
@@ -92,6 +94,7 @@ export const typeDefs = gql`
         activitys: [Activity!]!
         timeslots: [Timeslot!]!
         adminPmis: [AdminPmi!]!
+        jadwals: [Jadwal!]!
         createdAt: Date
     }
 
@@ -117,10 +120,20 @@ export const typeDefs = gql`
         createdAt: Date
     }
 
+    type Jadwal {
+        id: String
+        branch: Pmi!
+        branchId: String!
+        day: String
+        open: Boolean
+        editable: Boolean
+        timeslot: JSON
+    }
+
     type Query {
         getAllPendonor: [Pendonor]
         getPendonor(id: String): Pendonor
-        getPendonorByEmail(email: String): Pendonor
+        getPendonorByIdentifier(identifier: String): Pendonor
 
         getAllPendonorDetail: [PendonorDetail]
         getPendonorDetail(pendonorId: String): PendonorDetail
@@ -143,6 +156,8 @@ export const typeDefs = gql`
         getAdminPmiById(id: String): AdminPmi
         getAdminPmiByBranch(branchId: String): [AdminPmi]
         getAdminPmiByIdAndBranch(id: String, branchId: String): AdminPmi
+
+        getAllJadwal: [Jadwal]
     }
 
     type Mutation {
@@ -215,5 +230,14 @@ export const typeDefs = gql`
             role: String,
             status: Boolean
         ): AdminPmi
+
+        #Jadwal
+        addJadwal(
+            branchId: String,
+            day: String,
+            open: Boolean,
+            editable: Boolean,
+            timeslot: JSON
+        ): Jadwal
     }
 `;

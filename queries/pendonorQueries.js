@@ -13,10 +13,10 @@ module.exports = {
             }
         })
     },
-    getPendonorByEmail: function getPendonorByEmail(email) {
+    getPendonorByIdentifier: function getPendonorByIdentifier(identifier) {
         return prisma.pendonor.findFirst({
             where: {
-                email: email
+                identifier: identifier
             }
         })
     },
@@ -27,7 +27,8 @@ module.exports = {
                 email: cast.email,
                 password: cast.password,
                 phoneNumber: cast.phoneNumber,
-                occupation: cast.occupation
+                occupation: cast.occupation,
+                identifier: cast.identifier
             }
         })
     },
@@ -38,7 +39,8 @@ module.exports = {
                 fullName: cast.fullName,
                 email: cast.email,
                 phoneNumber: cast.phoneNumber,
-                occupation: cast.occupation
+                occupation: cast.occupation,
+                identifier: cast.identifier
             }
         })
     }

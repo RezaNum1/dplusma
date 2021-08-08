@@ -4,16 +4,19 @@ import activityQueries from '../queries/activityQueries'
 import pmiQueries from '../queries/pmiQueries'
 import timeslotQueries from '../queries/timeslotQueries'
 import adminPmiQueries from '../queries/adminPmiQueries'
+import jadwalQueries from '../queries/jadwalQueries'
 import { PrismaClient } from "@prisma/client"
+import graphQlJson from "graphql-type-json"
 
 const prisma = new PrismaClient();
 
 export const resolvers = {
+    JSON: graphQlJson,
     Query: {
         // ------- Pendonor
         getAllPendonor: () => pendonorQueries.getAllPendonor(),
         getPendonor: (_, {id}) => pendonorQueries.getPendonor(id),
-        getPendonorByEmail: (_, {email}) => pendonorQueries.getPendonorByEmail(email),
+        getPendonorByIdentifier: (_, {identifier}) => pendonorQueries.getPendonorByIdentifier(identifier),
 
         // ------- Pendonor
         getAllPendonorDetail: () => pendonorDetailQueries.getAllPendonorDetail(),
@@ -41,6 +44,9 @@ export const resolvers = {
         getAdminPmiById: (_, cast) => adminPmiQueries.getAdminPmiById(cast),
         getAdminPmiByBranch: (_, cast) => adminPmiQueries.getAdminPmiByBranch(cast),
         getAdminPmiByIdAndBranch: (_, cast) => adminPmiQueries.getAdminPmiByIdAndBranch(cast),
+
+        //  ------- Jadwal
+        getAllJadwal: () => jadwalQueries.getAllJadwal()
     },
     Mutation: {
         // ------- Pendonor
@@ -103,6 +109,12 @@ export const resolvers = {
         updateAdminPmi: async(_, cast) => {
             const updateOne = await adminPmiQueries.updateAdminPmi(cast)
             return updateOne
+        },
+
+        //  ------- Jadwal
+        addJadwal: async(_, cast) => {
+            const newOne = await jadwalQueries.addJadwal(cast)
+            return newOne
         }
     },
     Pendonor: {
@@ -146,6 +158,11 @@ export const resolvers = {
             return prisma.timeslot.findMany({
                 where: { branchId: parent.id }
             })
+        },
+        jadwals: (parent, args, context) => {
+            return prisma.jadwal.findMany({
+                where: { branchId: parent.id }
+            })
         }
     },
     Timeslot: {
@@ -156,6 +173,13 @@ export const resolvers = {
         }
     },
     AdminPmi: {
+        branch: (parent, _, context) => {
+            return prisma.pmi.findUnique({
+                where: { id: parent.branchId },
+            })
+        }
+    },
+    Jadwal: {
         branch: (parent, _, context) => {
             return prisma.pmi.findUnique({
                 where: { id: parent.branchId },

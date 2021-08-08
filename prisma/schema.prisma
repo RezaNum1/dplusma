@@ -17,6 +17,7 @@ model Pendonor {
   email   String  @db.VarChar(62)
   password  String  @db.VarChar(20)
   occupation  String  @db.VarChar(100)
+  identifier  String  @db.VarChar(255)
   pendonorDetail  PendonorDetail?
   activity  Activity[]
   createdAt DateTime  @default(now())
@@ -98,6 +99,7 @@ model Pmi {
   activitys Activity[]
   timeslots Timeslot[]
   adminPmi  AdminPmi[]
+  jadwals  Jadwal[]
   createdAt DateTime  @default(now())
 }
 
@@ -121,4 +123,14 @@ model AdminPmi {
   role  String  @db.VarChar(30)
   status  Boolean @default(true)
   createdAt DateTime  @default(now())
+}
+
+model Jadwal {
+  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
+  branch  Pmi @relation(fields: [branchId], references: [id])
+  branchId  String
+  day String @db.VarChar(100)
+  open  Boolean @default(true)
+  editable  Boolean @default(true)
+  timeslot  Json?
 }
