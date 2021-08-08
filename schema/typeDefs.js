@@ -162,8 +162,8 @@ export const typeDefs = gql`
 
     type Mutation {
         #Pendonor
-        addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, createdAt:  Date, updatedAt:  Date): Pendonor
-        updatePendonor(id: String, fullName: String, phoneNumber: String, email: String, occupation: String): Pendonor
+        addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, identifier: String, createdAt:  Date, updatedAt:  Date): Pendonor
+        updatePendonor(id: String, fullName: String, phoneNumber: String, email: String, occupation: String, identifier: String): Pendonor
 
         #PendonorDetail
         addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
