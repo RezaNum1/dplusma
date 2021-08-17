@@ -52,6 +52,10 @@ model PendonorDetail {
   pcrPositiveImg  String?  @db.VarChar(255)
   pcrNegativeDate DateTime?
   pcrNegativeImg  String?  @db.VarChar(255)
+  pass  Boolean?
+  lockPermanent Boolean?
+  unlockDate  DateTime?
+  testDate  DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }

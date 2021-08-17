@@ -41,6 +41,10 @@ module.exports = {
                 pcrPositiveImg: cast.pcrPositiveImg,
                 pcrNegativeDate: cast.pcrNegativeDate,
                 pcrNegativeImg: cast.pcrNegativeImg,
+                pass: cast.pass,
+                lockPermanent: cast.lockPermanent,
+                unlockDate: cast.unlockDate,
+                testDate: cast.testDate
             }
         })
     },
@@ -72,6 +76,10 @@ module.exports = {
                 pcrPositiveImg: cast.pcrPositiveImg,
                 pcrNegativeDate: cast.pcrNegativeDate,
                 pcrNegativeImg: cast.pcrNegativeImg,
+                pass: cast.pass,
+                lockPermanent: cast.lockPermanent,
+                unlockDate: cast.unlockDate,
+                testDate: cast.testDate
             }
         })
     }

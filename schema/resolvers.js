@@ -55,6 +55,11 @@ export const resolvers = {
             return newOne
         },
 
+        addPendonorAndDetail: async(_, cast) => {
+            const newOne = await pendonorQueries.addPendonorAndDetail(cast);
+            return newOne
+        },
+
         updatePendonor: async(_, cast) => {
             const updateOne = await pendonorQueries.updatePendonor(cast);
             return updateOne

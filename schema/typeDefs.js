@@ -47,6 +47,10 @@ export const typeDefs = gql`
         pcrPositiveImg: String
         pcrNegativeDate: Date
         pcrNegativeImg: String
+        pass: Boolean
+        lockPermanent: Boolean
+        unlockDate: Date
+        testDate: Date
         createdAt: Date
         updatedAt: Date
     }
@@ -163,18 +167,21 @@ export const typeDefs = gql`
     type Mutation {
         #Pendonor
         addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, identifier: String, createdAt:  Date, updatedAt:  Date): Pendonor
+        addPendonorAndDetail(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, identifier: String, createdAt:  Date, updatedAt:  Date, 
+                            riwayatCovid: Boolean, riwayatTransfusi: Boolean, riwayatHamil: Boolean, riwayatKeluhan: String, riwayatDonor: String, riwayatVaksin: String, riwayatKomorbid: String
+                            riwayatGejalaKlinis: String, pcrPositiveDate: Date, pcrNegativeDate: Date, pass: Boolean, lockPermanent: Boolean, unlockDate: Date, testDate: Date): Pendonor
         updatePendonor(id: String, fullName: String, phoneNumber: String, email: String, occupation: String, identifier: String): Pendonor
 
         #PendonorDetail
         addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, riwayatTransfusi: Boolean,
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
-                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String
+                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String, pass: Boolean, lockPermanent: Boolean, unlockDate: Date, testDate: Date
         ): PendonorDetail
         updatePendonorDetail(id: String, pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
                         domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, riwayatTransfusi: Boolean,
                         riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
-                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String
+                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String, pass: Boolean, lockPermanent: Boolean, unlockDate: Date, testDate: Date
         ): PendonorDetail
 
         #Pmi

@@ -32,6 +32,36 @@ module.exports = {
             }
         })
     },
+    addPendonorAndDetail: async function addPendonorAndDetail(cast) {
+        return await prisma.pendonor.create({
+            data: {
+                fullName: cast.fullName,
+                email: cast.email,
+                password: cast.password,
+                phoneNumber: cast.phoneNumber,
+                occupation: cast.occupation,
+                identifier: cast.identifier,
+                pendonorDetail: {
+                    create: {
+                        riwayatCovid: cast.riwayatCovid,
+                        riwayatTransfusi: cast.riwayatTransfusi,
+                        riwayatHamil: cast.riwayatHamil,
+                        riwayatKeluhan: cast.riwayatKeluhan,
+                        riwayatDonor: cast.riwayatDonor,
+                        riwayatVaksin: cast.riwayatVaksin,
+                        riwayatKomorbid: cast.riwayatKomorbid,
+                        riwayatGejalaKlinis: cast.riwayatGejalaKlinis,
+                        pcrPositiveDate: cast.pcrPositiveDate,
+                        pcrNegativeDate: cast.pcrNegativeDate,
+                        pass: cast.pass,
+                        lockPermanent: cast.lockPermanent,
+                        unlockDate: cast.unlockDate,
+                        testDate: cast.testDate,
+                    }
+                }
+            }
+        })
+    },
     updatePendonor: async function updatePendonor(cast) {
         return await prisma.pendonor.update({
             where: { id: cast.id },
@@ -45,3 +75,18 @@ module.exports = {
         })
     }
 }
+
+//     riwayatCovid
+// riwayatTransfusi
+//  riwayatHamil
+// riwayatKeluhan
+// riwayatDonor
+// riwayatVaksin
+//  riwayatKomorbid
+// riwayatGejalaKlinis
+//  pcrPositiveDate
+// pcrNegativeDate 
+// pass
+// lockPermanent
+// unlockDateUntil
+// testDate
