@@ -4,6 +4,7 @@ export const typeDefs = gql`
 
     scalar Date
     scalar JSON
+    scalar Upload
 
     type Pendonor {
         id: String
@@ -141,6 +142,7 @@ export const typeDefs = gql`
 
         getAllPendonorDetail: [PendonorDetail]
         getPendonorDetail(pendonorId: String): PendonorDetail
+        updateLockedData: [PendonorDetail]
 
         getAllPmi: [Pmi]
         getPmi(id: String): Pmi
@@ -162,6 +164,9 @@ export const typeDefs = gql`
         getAdminPmiByIdAndBranch(id: String, branchId: String): AdminPmi
 
         getAllJadwal: [Jadwal]
+
+        fetchBuckets:[String!]!
+        fetchObjects(bucketName:String):[Object!]!
     }
 
     type Mutation {
@@ -246,5 +251,23 @@ export const typeDefs = gql`
             editable: Boolean,
             timeslot: JSON
         ): Jadwal
+
+        #S3
+        createBucket(bucketName:String!) : Response
+        uploadObject(file:Upload!,bucketName:String!) : Object
+        uploadObjects(files:[Upload!]!,bucketName:String!) : [Object!]!
+        deleteObject(bucketName:String!,key:String!) : Response
+        deleteObjects(bucketName:String!,objectKeys:[String!]!) : Response
+        deleteBucket(bucketName:String!) : Response
+    }
+
+    type Object {
+        url:String!
+        key:String!
+    }
+
+    type Response {
+        success:Boolean!
+        message:String!
     }
 `;

@@ -5,13 +5,18 @@ import pmiQueries from '../queries/pmiQueries'
 import timeslotQueries from '../queries/timeslotQueries'
 import adminPmiQueries from '../queries/adminPmiQueries'
 import jadwalQueries from '../queries/jadwalQueries'
+import { queryResolver } from "../aws/query-resolvers.js"
+import { mutationResolver } from "../aws/mutation-resolvers.js"
+
 import { PrismaClient } from "@prisma/client"
 import graphQlJson from "graphql-type-json"
+import { GraphQLUpload } from 'graphql-upload'
 
 const prisma = new PrismaClient();
 
 export const resolvers = {
     JSON: graphQlJson,
+    Upload: GraphQLUpload,
     Query: {
         // ------- Pendonor
         getAllPendonor: () => pendonorQueries.getAllPendonor(),
@@ -21,6 +26,7 @@ export const resolvers = {
         // ------- Pendonor
         getAllPendonorDetail: () => pendonorDetailQueries.getAllPendonorDetail(),
         getPendonorDetail: (_, cast) => pendonorDetailQueries.getPendonorDetail(cast),
+        updateLockedData: () => pendonorDetailQueries.updateLockedData(),
 
         // ------- PMI
         getAllPmi: () => pmiQueries.getAllPmi(),
@@ -46,7 +52,12 @@ export const resolvers = {
         getAdminPmiByIdAndBranch: (_, cast) => adminPmiQueries.getAdminPmiByIdAndBranch(cast),
 
         //  ------- Jadwal
-        getAllJadwal: () => jadwalQueries.getAllJadwal()
+        getAllJadwal: () => jadwalQueries.getAllJadwal(),
+
+        //  ------- S3
+        fetchBuckets:() => new queryResolver().fetchBuckets(),
+
+        fetchObjects:(_,{bucketName}) => new queryResolver().fetchObjects(bucketName)
     },
     Mutation: {
         // ------- Pendonor
@@ -120,7 +131,20 @@ export const resolvers = {
         addJadwal: async(_, cast) => {
             const newOne = await jadwalQueries.addJadwal(cast)
             return newOne
-        }
+        },
+
+        //  ------- S3
+        createBucket:(_,{bucketName}) => new mutationResolver().createBucket(bucketName),
+
+        uploadObject:(_,{file,bucketName}) => new mutationResolver().uploadObject(file,bucketName),
+
+        uploadObjects:(_,{files,bucketName}) => new mutationResolver().uploadObjects(files,bucketName),
+
+        deleteObject:(_,{bucketName,key}) => new mutationResolver().deleteObject(bucketName,key),
+
+        deleteObjects:(_,{bucketName,objectKeys}) => new mutationResolver().deleteObjects(bucketName,objectKeys),
+
+        deleteBucket:(_,{bucketName}) => new mutationResolver().deleteBucket(bucketName)
     },
     Pendonor: {
         pendonorDetails: (parent, args, context) => {

@@ -13,6 +13,17 @@ module.exports = {
             }
         })
     },
+    updateLockedData: async function updateLockedData() {
+        const today = new Date(new Date() - new Date().getTimezoneOffset() * 60 * 1000)
+        const dateOnly = `${today.toISOString().split("T")[0]}`
+        const result = await prisma.$queryRaw`
+            UPDATE "public"."PendonorDetail"
+            SET "pass" = false, "lockPermanent" = false, "unlockDate" = NULL, "testDate" = NULL
+            WHERE "unlockDate" = now()::date
+            `
+        return result // On Progress
+        // to_char(createdAt, 'YYYY-MM-DD') LIKE '${dateOnly}%'
+    },
     addPendonorDetail: async function addPendonorDetail(cast) {
         return await prisma.pendonorDetail.create({
             data: {

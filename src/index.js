@@ -4,6 +4,8 @@ import cors from 'cors'
 import { resolvers } from "../schema/resolvers";
 import { typeDefs } from "../schema/typeDefs";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
+import corn from "node-cron"
+import { graphqlUploadExpress } from 'graphql-upload'
 
 async function startServer() {
     const app = express()
@@ -27,13 +29,19 @@ async function startServer() {
 
     await server.start();
 
-    server.applyMiddleware({ app, path: "/graphql", cors: true });
+    app.use(graphqlUploadExpress());
+    server.applyMiddleware({ app, path: "/graphql" });
 
     app.listen({ port: 80 }, () => {
         console.log(`🚀 Server ready at http://localhost:80${server.graphqlPath}`)
     })
     app.get('/', (req,res,next) => {
         res.redirect('/graphql')
+    })
+
+    corn.schedule('0 */2 * * * *', () => {
+        updateL
+        
     })
 }
 
