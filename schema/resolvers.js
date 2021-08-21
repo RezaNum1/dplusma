@@ -136,7 +136,7 @@ export const resolvers = {
         //  ------- S3
         createBucket:(_,{bucketName}) => new mutationResolver().createBucket(bucketName),
 
-        uploadObject:(_,{file,bucketName}) => new mutationResolver().uploadObject(file,bucketName),
+        uploadObject:(_,{file,fileName,bucketName}) => new mutationResolver().uploadObject(file,fileName,bucketName),
 
         uploadObjects:(_,{files,bucketName}) => new mutationResolver().uploadObjects(files,bucketName),
 

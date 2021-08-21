@@ -135,6 +135,16 @@ export const typeDefs = gql`
         timeslot: JSON
     }
 
+    type Object {
+        url:String!
+        key:String!
+    }
+
+    type Response {
+        success:Boolean!
+        message:String!
+    }
+
     type Query {
         getAllPendonor: [Pendonor]
         getPendonor(id: String): Pendonor
@@ -254,20 +264,10 @@ export const typeDefs = gql`
 
         #S3
         createBucket(bucketName:String!) : Response
-        uploadObject(file:Upload!,bucketName:String!) : Object
+        uploadObject(file:Upload!,fileName: String!, bucketName:String!) : Object
         uploadObjects(files:[Upload!]!,bucketName:String!) : [Object!]!
         deleteObject(bucketName:String!,key:String!) : Response
         deleteObjects(bucketName:String!,objectKeys:[String!]!) : Response
         deleteBucket(bucketName:String!) : Response
-    }
-
-    type Object {
-        url:String!
-        key:String!
-    }
-
-    type Response {
-        success:Boolean!
-        message:String!
     }
 `;
