@@ -40,7 +40,7 @@ async function startServer() {
         res.redirect('/graphql')
     })
 
-    corn.schedule('0 0 24 * * *', () => {
+    corn.schedule('0 0 0 * * *', () => {
         pendonorDetailQueries.updateLockedData()
     })
 }
