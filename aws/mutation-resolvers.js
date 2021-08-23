@@ -68,7 +68,7 @@ export const mutationResolver = class MutationResolver {
     };
 
     //upload objects.
-    async uploadObjects(files,bucketName){
+    async uploadObjects(files,fileNames,bucketName){
 
         let params = {
             Bucket:bucketName,
@@ -78,12 +78,13 @@ export const mutationResolver = class MutationResolver {
         };
 
         let objects = [];
-
+        let names = fileNames.split(",")
+        console.log(names)
         for(let i = 0; i < files.length; i++){
 
             let file = files[i];
 
-            let {createReadStream,filename} = await file;
+            let {createReadStream, fileNames} = await file;
 
             let stream = createReadStream();
 
@@ -91,11 +92,11 @@ export const mutationResolver = class MutationResolver {
 
             params.Body = stream;
 
-            let timestamp = new Date().getTime();
+            // let timestamp = new Date().getTime();
             
-            let file_extension = extname(filename);
+            // let file_extension = extname(filename);
 
-            params.Key = `images/${timestamp}${file_extension}`;
+            params.Key = `images/${names[i]}`;
 
             let upload = promisify(this.s3.upload.bind(this.s3));
 

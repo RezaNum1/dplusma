@@ -6,6 +6,13 @@ module.exports = {
     getAllJadwal: function getAllJadwal() {
         return prisma.jadwal.findMany()
     },
+    getJadwalById: function getJadwalById(cast) {
+        return prisma.jadwal.findFirst({
+            where: {
+                id: cast.id
+            }
+        })
+    },
     addJadwal: async function addJadwal(cast) {
         return await prisma.jadwal.create({
             data: {

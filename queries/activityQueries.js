@@ -40,6 +40,13 @@ module.exports = {
             }
         })
     },
+    getQueueNumber: async function getQueueNumber() {
+        const result = await prisma.$queryRaw`
+                SELECT COUNT(id) FROM "public"."Activity" WHERE "didSchedule" = true AND cast("updatedAt" as date) = current_date;
+            `
+            console.log(result) // For Later
+        return object
+    },
     addActivity: async function addActivity(cast) {
         return await prisma.activity.create({
             data: {

@@ -38,6 +38,7 @@ export const resolvers = {
         getActivityForInterview: () => activityQueries.getActivityForInterview(), 
         getActivityForBloodTest: () => activityQueries.getActivityForBloodTest(),
         getActivityForDonor: () => activityQueries.getActivityForDonor(),
+        getQueueNumber: () => activityQueries.getQueueNumber(),
 
         // ------- Timeslot 
         getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
@@ -138,7 +139,7 @@ export const resolvers = {
 
         uploadObject:(_,{file,fileName,bucketName}) => new mutationResolver().uploadObject(file,fileName,bucketName),
 
-        uploadObjects:(_,{files,bucketName}) => new mutationResolver().uploadObjects(files,bucketName),
+        uploadObjects:(_,{files,fileNames,bucketName}) => new mutationResolver().uploadObjects(files,fileNames,bucketName),
 
         deleteObject:(_,{bucketName,key}) => new mutationResolver().deleteObject(bucketName,key),
 

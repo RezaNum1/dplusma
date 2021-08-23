@@ -6,6 +6,7 @@ import { typeDefs } from "../schema/typeDefs";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
 import corn from "node-cron"
 import { graphqlUploadExpress } from 'graphql-upload'
+import pendonorDetailQueries from '../queries/pendonorDetailQueries'
 
 async function startServer() {
     const app = express()
@@ -39,9 +40,8 @@ async function startServer() {
         res.redirect('/graphql')
     })
 
-    corn.schedule('0 */2 * * * *', () => {
-        updateL
-        
+    corn.schedule('0 0 24 * * *', () => {
+        pendonorDetailQueries.updateLockedData()
     })
 }
 
