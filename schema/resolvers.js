@@ -54,6 +54,7 @@ export const resolvers = {
 
         //  ------- Jadwal
         getAllJadwal: () => jadwalQueries.getAllJadwal(),
+        getJadwalById: (_, cast) => jadwalQueries.getJadwalById(cast),
 
         //  ------- S3
         fetchBuckets:() => new queryResolver().fetchBuckets(),
@@ -107,6 +108,10 @@ export const resolvers = {
             const updateOne = await activityQueries.updateActivity(cast)
             return updateOne
         },
+        updateScheduleStatus: async(_, cast) => {
+            const updateOne = await activityQueries.updateScheduleStatus(cast)
+            return updateOne
+        },
 
         // -------- Timeslot
         addTimeslot: async(_, cast) => {
@@ -132,6 +137,10 @@ export const resolvers = {
         addJadwal: async(_, cast) => {
             const newOne = await jadwalQueries.addJadwal(cast)
             return newOne
+        },
+        updateJadwals: async(_, cast) => {
+            const updateOne = await jadwalQueries.updateJadwals(cast)
+            return updateOne
         },
 
         //  ------- S3

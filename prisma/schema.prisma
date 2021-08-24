@@ -69,6 +69,8 @@ model Activity {
   donorType String?  @db.VarChar(35)
   interviewNotes  String?  @db.VarChar(255)
   antibodyLevel  String?  @db.VarChar(100)
+  queue String? @db.VarChar(20)
+  slot  String? @db.VarChar(100)
   passForm  Boolean?  @default(false)
   didSchedule Boolean? @default(false)
   didInterview  Boolean? @default(false)

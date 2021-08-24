@@ -179,6 +179,7 @@ export const typeDefs = gql`
         getAdminPmiByIdAndBranch(id: String, branchId: String): AdminPmi
 
         getAllJadwal: [Jadwal]
+        getJadwalById(id: String): Jadwal
 
         fetchBuckets:[String!]!
         fetchObjects(bucketName:String):[Object!]!
@@ -222,6 +223,8 @@ export const typeDefs = gql`
                     didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date, didScheduleTestAt: Date,didDonorAt: Date
         ): Activity
 
+        updateScheduleStatus(id: String, didSchedule: Boolean): Activity
+
         #Timeslot
         addTimeslot(
             branchId: String,
@@ -261,6 +264,14 @@ export const typeDefs = gql`
         #Jadwal
         addJadwal(
             branchId: String,
+            day: String,
+            open: Boolean,
+            editable: Boolean,
+            timeslot: JSON
+        ): Jadwal
+
+        updateJadwals(
+            id: String,
             day: String,
             open: Boolean,
             editable: Boolean,

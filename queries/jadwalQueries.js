@@ -23,5 +23,18 @@ module.exports = {
                 timeslot: cast.timeslot
             }
         })
+    },
+    updateJadwals: async function updateJadwals(cast) {
+        return await prisma.jadwal.update({
+            where: {
+                id: cast.id
+            },
+            data: {
+                day: cast.day,
+                editable: cast.editable,
+                open: cast.open,
+                timeslot: cast.timeslot
+            }
+        })
     }
 }

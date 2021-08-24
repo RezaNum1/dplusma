@@ -7,6 +7,7 @@ module.exports = {
         return prisma.activity.findMany()
     },
     getActivity: function getActivity(cast) {
+        
         return prisma.activity.findFirst({
             where: {
                 pendonorId: cast.pendonorId
@@ -41,10 +42,8 @@ module.exports = {
         })
     },
     getQueueNumber: async function getQueueNumber() {
-        const result = await prisma.$queryRaw`
-                SELECT COUNT(id) FROM "public"."Activity" WHERE "didSchedule" = true AND cast("updatedAt" as date) = current_date;
-            `
-            console.log(result) // For Later
+        
+            console.log() // For Later
         return object
     },
     addActivity: async function addActivity(cast) {
@@ -103,6 +102,20 @@ module.exports = {
                 passBloodTestAt: cast.passBloodTestAt,
                 didScheduleTestAt: cast.didScheduleTestAt,
                 didDonorAt: cast.didDonorAt
+            }
+        })
+    },
+    updateScheduleStatus: async function updateScheduleStatus(cast) {
+        const result = await prisma.$queryRaw`
+                SELECT COUNT(id) FROM "public"."Activity" WHERE "didSchedule" = true AND cast("updatedAt" as date) = current_date;
+            `
+        return await prisma.activity.update({
+            where: {
+                id: cast.id
+            },
+            data: {
+                didSchedule: cast.didSchedule,
+                queue: `${result[0]["count"] + 1}`
             }
         })
     }
