@@ -2,7 +2,6 @@ import pendonorQueries from '../queries/pendonorQueries'
 import pendonorDetailQueries from '../queries/pendonorDetailQueries'
 import activityQueries from '../queries/activityQueries'
 import pmiQueries from '../queries/pmiQueries'
-import timeslotQueries from '../queries/timeslotQueries'
 import adminPmiQueries from '../queries/adminPmiQueries'
 import jadwalQueries from '../queries/jadwalQueries'
 import { queryResolver } from "../aws/query-resolvers.js"
@@ -38,12 +37,6 @@ export const resolvers = {
         getActivityForInterview: () => activityQueries.getActivityForInterview(), 
         getActivityForBloodTest: () => activityQueries.getActivityForBloodTest(),
         getActivityForDonor: () => activityQueries.getActivityForDonor(),
-
-        // ------- Timeslot 
-        getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
-        getTimeslotById: (_, cast) => timeslotQueries.getTimeslotById(cast),
-        getTimeslotByBranch: (_, cast) => timeslotQueries.getTimeslotByBranch(cast),
-        getTimeslotByIdAndBranch: (_, cast) => timeslotQueries.getTimeslotByIdAndBranch(cast),
 
         // ------- AdminPmi 
         getAllAdminPmi: () => adminPmiQueries.getAllAdminPmi(),
@@ -109,16 +102,6 @@ export const resolvers = {
         },
         updateScheduleStatus: async(_, cast) => {
             const updateOne = await activityQueries.updateScheduleStatus(cast)
-            return updateOne
-        },
-
-        // -------- Timeslot
-        addTimeslot: async(_, cast) => {
-            const newOne = await timeslotQueries.addTimeslot(cast)
-            return newOne
-        },
-        updateTimeslot: async(_, cast) => {
-            const updateOne = await timeslotQueries.updateTimeslot(cast)
             return updateOne
         },
 
@@ -192,21 +175,9 @@ export const resolvers = {
                 where: { branchId: parent.id }
             })
         },
-        timeslots: (parent, args, context) => {
-            return prisma.timeslot.findMany({
-                where: { branchId: parent.id }
-            })
-        },
         jadwals: (parent, args, context) => {
             return prisma.jadwal.findMany({
                 where: { branchId: parent.id }
-            })
-        }
-    },
-    Timeslot: {
-        branch: (parent, _, context) => {
-            return prisma.pmi.findUnique({
-                where: { id: parent.branchId },
             })
         }
     },

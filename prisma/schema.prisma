@@ -103,19 +103,8 @@ model Pmi {
   langitude String  @db.VarChar(100)
   longitude String  @db.VarChar(100)
   activitys Activity[]
-  timeslots Timeslot[]
   adminPmi  AdminPmi[]
   jadwals  Jadwal[]
-  createdAt DateTime  @default(now())
-}
-
-model Timeslot {
-  id  String @id @default(dbgenerated("(gen_random_uuid())::TEXT"))
-  branch  Pmi @relation(fields: [branchId], references: [id])
-  branchId  String
-  type  String  @db.VarChar(20)
-  timeSlot  String  @db.VarChar(50)
-  totalSlot Int
   createdAt DateTime  @default(now())
 }
 
@@ -136,6 +125,7 @@ model Jadwal {
   branch  Pmi @relation(fields: [branchId], references: [id])
   branchId  String
   day String @db.VarChar(100)
+  dayInt  Int
   open  Boolean @default(true)
   editable  Boolean @default(true)
   timeslot  Json?

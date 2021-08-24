@@ -99,19 +99,8 @@ export const typeDefs = gql`
         langitude: String
         longitude: String
         activitys: [Activity!]!
-        timeslots: [Timeslot!]!
         adminPmis: [AdminPmi!]!
         jadwals: [Jadwal!]!
-        createdAt: Date
-    }
-
-    type Timeslot {
-        id: String
-        branch: Pmi!
-        branchId: String!
-        type: String
-        timeSlot: String
-        totalSlot: Int
         createdAt: Date
     }
 
@@ -132,6 +121,7 @@ export const typeDefs = gql`
         branch: Pmi!
         branchId: String!
         day: String
+        dayInt: Int
         open: Boolean
         editable: Boolean
         timeslot: JSON
@@ -168,11 +158,6 @@ export const typeDefs = gql`
         getActivityForInterview: [Activity]
         getActivityForBloodTest: [Activity]
         getActivityForDonor: [Activity]
-
-        getAllTimeslot: [Timeslot]
-        getTimeslotById(id: String): Timeslot
-        getTimeslotByBranch(branchId: String): [Timeslot]
-        getTimeslotByIdAndBranch(id: String, branchId: String): Timeslot
 
         getAllAdminPmi: [AdminPmi]
         getAdminPmiById(id: String): AdminPmi
@@ -226,23 +211,6 @@ export const typeDefs = gql`
 
         updateScheduleStatus(id: String, didSchedule: Boolean): Activity
 
-        #Timeslot
-        addTimeslot(
-            branchId: String,
-            type: String,
-            timeSlot: String,
-            totalSlot: Int,
-            createdAt: Date
-        ): Timeslot
-
-        updateTimeslot(
-            id: String
-            type: String,
-            timeSlot: String,
-            totalSlot: Int,
-            createdAt: Date
-        ): Timeslot
-
         #AdminPmi
         addAdminPmi(
             branchId: String,
@@ -266,6 +234,7 @@ export const typeDefs = gql`
         addJadwal(
             branchId: String,
             day: String,
+            dayInt: Int
             open: Boolean,
             editable: Boolean,
             timeslot: JSON
@@ -274,6 +243,7 @@ export const typeDefs = gql`
         updateJadwals(
             id: String,
             day: String,
+            dayInt: Int
             open: Boolean,
             editable: Boolean,
             timeslot: JSON

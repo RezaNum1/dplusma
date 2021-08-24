@@ -18,6 +18,7 @@ module.exports = {
             data: {
                 branch: { connect: { id: cast.branchId } },
                 day: cast.day,
+                dayInt: cast.dayInt,
                 open: cast.open,
                 editable: cast.editable,
                 timeslot: cast.timeslot
@@ -31,6 +32,7 @@ module.exports = {
             },
             data: {
                 day: cast.day,
+                dayInt: cast.dayInt,
                 editable: cast.editable,
                 open: cast.open,
                 timeslot: cast.timeslot
