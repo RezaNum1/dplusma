@@ -41,11 +41,6 @@ module.exports = {
             }
         })
     },
-    getQueueNumber: async function getQueueNumber() {
-        
-            console.log() // For Later
-        return object
-    },
     addActivity: async function addActivity(cast) {
         return await prisma.activity.create({
             data: {

@@ -38,7 +38,6 @@ export const resolvers = {
         getActivityForInterview: () => activityQueries.getActivityForInterview(), 
         getActivityForBloodTest: () => activityQueries.getActivityForBloodTest(),
         getActivityForDonor: () => activityQueries.getActivityForDonor(),
-        getQueueNumber: () => activityQueries.getQueueNumber(),
 
         // ------- Timeslot 
         getAllTimeslot: () => timeslotQueries.getAllTimeslot(),
