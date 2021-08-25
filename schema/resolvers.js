@@ -43,6 +43,7 @@ export const resolvers = {
         getAdminPmiById: (_, cast) => adminPmiQueries.getAdminPmiById(cast),
         getAdminPmiByBranch: (_, cast) => adminPmiQueries.getAdminPmiByBranch(cast),
         getAdminPmiByIdAndBranch: (_, cast) => adminPmiQueries.getAdminPmiByIdAndBranch(cast),
+        login: (_, cast) => adminPmiQueries.login(cast),
 
         //  ------- Jadwal
         getAllJadwal: () => jadwalQueries.getAllJadwal(),
@@ -177,7 +178,7 @@ export const resolvers = {
         },
         jadwals: (parent, args, context) => {
             return prisma.jadwal.findMany({
-                where: { branchId: parent.id }
+                where: { branchId: parent.id, open: true }
             })
         }
     },

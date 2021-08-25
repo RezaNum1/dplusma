@@ -163,6 +163,7 @@ export const typeDefs = gql`
         getAdminPmiById(id: String): AdminPmi
         getAdminPmiByBranch(branchId: String): [AdminPmi]
         getAdminPmiByIdAndBranch(id: String, branchId: String): AdminPmi
+        login(email: String, password: String): AdminPmi
 
         getAllJadwal: [Jadwal]
         getJadwalById(id: String): Jadwal
@@ -173,43 +174,216 @@ export const typeDefs = gql`
 
     type Mutation {
         #Pendonor
-        addPendonor(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, identifier: String, createdAt:  Date, updatedAt:  Date): Pendonor
-        addPendonorAndDetail(fullName: String, phoneNumber: String!, email: String!, password: String!, occupation: String, identifier: String, createdAt:  Date, updatedAt:  Date, 
-                            riwayatCovid: Boolean, riwayatTransfusi: Boolean, riwayatHamil: Boolean, riwayatKeluhan: String, riwayatDonor: String, riwayatVaksin: String, riwayatKomorbid: String
-                            riwayatGejalaKlinis: String, pcrPositiveDate: Date, pcrNegativeDate: Date, pass: Boolean, lockPermanent: Boolean, unlockDate: Date, testDate: Date): Pendonor
-        updatePendonor(id: String, fullName: String, phoneNumber: String, email: String, occupation: String, identifier: String): Pendonor
+        addPendonor(
+            fullName: String, 
+            phoneNumber: String!, 
+            email: String!, 
+            password: String!, 
+            occupation: String, 
+            identifier: String, 
+            createdAt:  Date, 
+            updatedAt:  Date
+        ): Pendonor
+
+        addPendonorAndDetail(
+            fullName: String, 
+            phoneNumber: String!, 
+            email: String!, 
+            password: String!, 
+            occupation: String, 
+            identifier: String, 
+            createdAt:  Date, 
+            updatedAt:  Date, 
+            riwayatCovid: Boolean, 
+            riwayatTransfusi: Boolean, 
+            riwayatHamil: Boolean, 
+            riwayatKeluhan: String, 
+            riwayatDonor: String, 
+            riwayatVaksin: String, 
+            riwayatKomorbid: String
+            riwayatGejalaKlinis: String, 
+            pcrPositiveDate: Date, 
+            pcrNegativeDate: Date, 
+            pass: Boolean, 
+            lockPermanent: Boolean, 
+            unlockDate: Date, 
+            testDate: Date
+        ): Pendonor
+
+        updatePendonor(
+            id: String, 
+            fullName: String, 
+            phoneNumber: String, 
+            email: String, 
+            occupation: String, 
+            identifier: String
+        ): Pendonor
 
         #PendonorDetail
-        addPendonorDetail(pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
-                        domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, riwayatTransfusi: Boolean,
-                        riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
-                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String, pass: Boolean, lockPermanent: Boolean, unlockDate: Date, testDate: Date
+        addPendonorDetail(
+            pendonorId: String, 
+            nik: String, 
+            sex: String, 
+            bloodType: String, 
+            placeOfBirth: String, 
+            dateOfBirth: Date, 
+            donorCount: Int, 
+            domisiliProvinsi: String, 
+            domisiliKotKab: String, 
+            domisiliKecamatan: String, 
+            domisiliKelurahan: String, 
+            domisiliAddress: String, 
+            riwayatHamil: Boolean, 
+            riwayatCovid: Boolean, 
+            riwayatTransfusi: Boolean,
+            riwayatKeluhan: String, 
+            riwayatKomorbid: String, 
+            riwayatDonor: String, 
+            riwayatVaksin: String, 
+            riwayatGejalaKlinis: String, 
+            hospitalName: String,
+            pcrPositiveDate: Date, 
+            pcrPositiveImg: String, 
+            pcrNegativeDate: Date, 
+            pcrNegativeImg: String, 
+            pass: Boolean, 
+            lockPermanent: Boolean, 
+            unlockDate: Date, 
+            testDate: Date
         ): PendonorDetail
-        updatePendonorDetail(id: String, pendonorId: String, nik: String, sex: String, bloodType: String, placeOfBirth: String, dateOfBirth: Date, donorCount: Int, domisiliProvinsi: String, 
-                        domisiliKotKab: String, domisiliKecamatan: String, domisiliKelurahan: String, domisiliAddress: String, riwayatHamil: Boolean, riwayatCovid: Boolean, riwayatTransfusi: Boolean,
-                        riwayatKeluhan: String, riwayatKomorbid: String, riwayatDonor: String, riwayatVaksin: String, riwayatGejalaKlinis: String, hospitalName: String,
-                        pcrPositiveDate: Date, pcrPositiveImg: String, pcrNegativeDate: Date, pcrNegativeImg: String, pass: Boolean, lockPermanent: Boolean, unlockDate: Date, testDate: Date
+
+        updatePendonorDetail(
+            id: String, 
+            pendonorId: String, 
+            nik: String, 
+            sex: String, 
+            bloodType: String, 
+            placeOfBirth: String, 
+            dateOfBirth: Date, 
+            donorCount: Int, 
+            domisiliProvinsi: String, 
+            domisiliKotKab: String, 
+            domisiliKecamatan: String, 
+            domisiliKelurahan: String, 
+            domisiliAddress: String, 
+            riwayatHamil: Boolean, 
+            riwayatCovid: Boolean, 
+            riwayatTransfusi: Boolean,
+            riwayatKeluhan: String, 
+            riwayatKomorbid: String, 
+            riwayatDonor: String, 
+            riwayatVaksin: String, 
+            riwayatGejalaKlinis: String, 
+            hospitalName: String,
+            pcrPositiveDate: Date, 
+            pcrPositiveImg: String, 
+            pcrNegativeDate: Date, 
+            pcrNegativeImg: String, 
+            pass: Boolean, 
+            lockPermanent: Boolean, 
+            unlockDate: Date, 
+            testDate: Date
         ): PendonorDetail
 
         #Pmi
-        addPmi(branchName: String, branchSize: String, branchAddress: String, phoneNumber: String, availability: String, langitude: String, longitude: String, createdAt: Date): Pmi
-        updatePmi(id: String, branchName: String, branchSize: String, branchAddress: String, phoneNumber: String, availability: String, langitude: String, longitude: String): Pmi
+        addPmi(
+            branchName: String, 
+            branchSize: String, 
+            branchAddress: String, 
+            phoneNumber: String, 
+            availability: String, 
+            langitude: String, 
+            longitude: String, 
+            createdAt: Date
+        ): Pmi
+
+        updatePmi(
+            id: String, 
+            branchName: String, 
+            branchSize: String, 
+            branchAddress: String, 
+            phoneNumber: String, 
+            availability: String, 
+            langitude: String, 
+            longitude: String
+        ): Pmi
 
         #Activity        
-        addActivity(branchId: String, pendonorId: String, donorType: String, interviewNotes: String, antibodyLevel: String, queue: String, slot: String,
-                    passForm: Boolean,didSchedule: Boolean, didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
-                    passBloodTest: Boolean,didScheduleTest: Boolean, didDonor: Boolean, processState: Boolean, passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
-                    didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String,passFormAt: Date,didScheduleAt: Date,
-                    didInterviewAt: Date, passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date,didScheduleTestAt: Date,didDonorAt: Date
+        addActivity(
+            branchId: String, 
+            pendonorId: String, 
+            donorType: String, 
+            interviewNotes: String, 
+            antibodyLevel: String, 
+            queue: String, 
+            slot: String,
+            passForm: Boolean,
+            didSchedule: Boolean, 
+            didInterview: Boolean,
+            passInterview: Boolean,
+            didBloodTest: Boolean,
+            passBloodTest: Boolean,
+            didScheduleTest: Boolean, 
+            didDonor: Boolean, 
+            processState: Boolean, 
+            passFormShow: Boolean,
+            didScheduleShow: Boolean,
+            didInterviewShow: Boolean,
+            passInterviewShow: Boolean,
+            didBloodTestShow: Boolean,
+            passBloodTestShow: Boolean,
+            didScheduleTestShow: Boolean,
+            didDonorShow: Boolean,
+            proofImg: String,
+            passFormAt: Date,
+            didScheduleAt: Date,
+            didInterviewAt: Date, 
+            passInterviewAt: Date,
+            didBloodTestAt: Date,
+            passBloodTestAt: Date,
+            didScheduleTestAt: Date,
+            didDonorAt: Date
         ): Activity
 
-        updateActivity(id: String, donorType: String, interviewNotes: String, antibodyLevel: String, queue: String, slot: String, passForm: Boolean,didSchedule: Boolean,didInterview: Boolean,passInterview: Boolean,didBloodTest: Boolean,
-                    passBloodTest: Boolean,didScheduleTest: Boolean,didDonor: Boolean, processState: Boolean, passFormShow: Boolean,didScheduleShow: Boolean,didInterviewShow: Boolean,passInterviewShow: Boolean,
-                    didBloodTestShow: Boolean,passBloodTestShow: Boolean,didScheduleTestShow: Boolean,didDonorShow: Boolean,proofImg: String, passFormAt: Date, didScheduleAt: Date,
-                    didInterviewAt: Date,passInterviewAt: Date,didBloodTestAt: Date,passBloodTestAt: Date, didScheduleTestAt: Date,didDonorAt: Date
+        updateActivity(
+            id: String, 
+            donorType: String, 
+            interviewNotes: String, 
+            antibodyLevel: String, 
+            queue: String, 
+            slot: String, 
+            passForm: Boolean,
+            didSchedule: Boolean,
+            didInterview: Boolean,
+            passInterview: Boolean,
+            didBloodTest: Boolean,
+            passBloodTest: Boolean,
+            didScheduleTest: Boolean,
+            didDonor: Boolean, 
+            processState: Boolean, 
+            passFormShow: Boolean,
+            didScheduleShow: Boolean,
+            didInterviewShow: Boolean,
+            passInterviewShow: Boolean,
+            didBloodTestShow: Boolean,
+            passBloodTestShow: Boolean,
+            didScheduleTestShow: Boolean,
+            didDonorShow: Boolean,
+            proofImg: String, 
+            passFormAt: Date, 
+            didScheduleAt: Date,
+            didInterviewAt: Date,
+            passInterviewAt: Date,
+            didBloodTestAt: Date,
+            passBloodTestAt: Date, 
+            didScheduleTestAt: Date,
+            didDonorAt: Date
         ): Activity
 
-        updateScheduleStatus(id: String, didSchedule: Boolean): Activity
+        updateScheduleStatus(
+            id: String, 
+            didSchedule: Boolean
+        ): Activity
 
         #AdminPmi
         addAdminPmi(

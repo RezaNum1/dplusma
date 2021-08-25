@@ -34,6 +34,16 @@ module.exports = {
 
         return data
     },
+    login: function login(cast) {
+        const data = prisma.adminPmi.findFirst({
+            where: {
+                email: cast.email,
+                password: cast.password
+            }
+        })
+
+        return data
+    },
     addAdminPmi: async function addAdminPmi(cast) {
         return await prisma.adminPmi.create({
             data: {
