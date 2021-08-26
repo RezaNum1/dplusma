@@ -20,6 +20,22 @@ module.exports = {
             }
         })
     },
+    getAllPendonorByBranch: async function getAllPendonorByBranch(cast) {
+        var pendonorResult = []
+        const result = await prisma.$queryRaw`
+            SELECT P.*
+            FROM "public"."Pendonor" P
+            INNER JOIN "public"."Activity" A ON A."pendonorId" = P."id"
+            WHERE A."branchId" = ${cast.branchId}
+            `
+
+        result.map((x) => {
+            if (pendonorResult.filter(e => e.id == x.id).length == 0) {
+                pendonorResult.push(x)
+            }
+        })
+        return pendonorResult
+    },
     addPendonor: async function addPendonor(cast) {
         return await prisma.pendonor.create({
             data: {
@@ -28,7 +44,8 @@ module.exports = {
                 password: cast.password,
                 phoneNumber: cast.phoneNumber,
                 occupation: cast.occupation,
-                identifier: cast.identifier
+                identifier: cast.identifier,
+                fcm_token: cast.fcm_token
             }
         })
     },
@@ -41,6 +58,7 @@ module.exports = {
                 phoneNumber: cast.phoneNumber,
                 occupation: cast.occupation,
                 identifier: cast.identifier,
+                fcm_token: cast.fcm_token,
                 pendonorDetail: {
                     create: {
                         riwayatCovid: cast.riwayatCovid,
@@ -70,23 +88,9 @@ module.exports = {
                 email: cast.email,
                 phoneNumber: cast.phoneNumber,
                 occupation: cast.occupation,
-                identifier: cast.identifier
+                identifier: cast.identifier,
+                fcm_token: cast.fcm_token,
             }
         })
     }
 }
-
-//     riwayatCovid
-// riwayatTransfusi
-//  riwayatHamil
-// riwayatKeluhan
-// riwayatDonor
-// riwayatVaksin
-//  riwayatKomorbid
-// riwayatGejalaKlinis
-//  pcrPositiveDate
-// pcrNegativeDate 
-// pass
-// lockPermanent
-// unlockDateUntil
-// testDate

@@ -14,30 +14,33 @@ module.exports = {
             }
         })
     },
-    getActivityForInterview: function getActivityForInterview() {
+    getActivityForInterview: function getActivityForInterview(cast) {
         return prisma.activity.findMany({
             where: {
                 passForm: true,
                 didSchedule: true,
-                didInterview: false
+                didInterview: false,
+                branchId: cast.branchId
             }
         })
     },
-    getActivityForBloodTest: function getActivityForBloodTest() {
+    getActivityForBloodTest: function getActivityForBloodTest(cast) {
         return prisma.activity.findMany({
             where: {
                 didInterview: true,
                 passInterview: true,
-                didBloodTest: false
+                didBloodTest: false,
+                branchId: cast.branchId
             }
         })
     },
-    getActivityForDonor: function getActivityForDonor() {
+    getActivityForDonor: function getActivityForDonor(cast) {
         return prisma.activity.findMany({
             where: {
                 didBloodTest: true,
                 passBloodTest: true,
-                didDonor: false
+                didDonor: false,
+                branchId: cast.branchId
             }
         })
     },

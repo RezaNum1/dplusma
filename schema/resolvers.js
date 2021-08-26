@@ -21,6 +21,7 @@ export const resolvers = {
         getAllPendonor: () => pendonorQueries.getAllPendonor(),
         getPendonor: (_, {id}) => pendonorQueries.getPendonor(id),
         getPendonorByIdentifier: (_, {identifier}) => pendonorQueries.getPendonorByIdentifier(identifier),
+        getAllPendonorByBranch: (_, cast) => pendonorQueries.getAllPendonorByBranch(cast),
 
         // ------- Pendonor
         getAllPendonorDetail: () => pendonorDetailQueries.getAllPendonorDetail(),
@@ -34,9 +35,10 @@ export const resolvers = {
         // ------- Activity
         getAllActivity: () => activityQueries.getAllActivity(),
         getActivity: (_, cast) => activityQueries.getActivity(cast),
-        getActivityForInterview: () => activityQueries.getActivityForInterview(), 
-        getActivityForBloodTest: () => activityQueries.getActivityForBloodTest(),
-        getActivityForDonor: () => activityQueries.getActivityForDonor(),
+        getActivityForInterview: (_, cast) => activityQueries.getActivityForInterview(cast), 
+        getActivityForBloodTest: (_, cast) => activityQueries.getActivityForBloodTest(cast),
+        getActivityForDonor: (_, cast) => activityQueries.getActivityForDonor(cast),
+        
 
         // ------- AdminPmi 
         getAllAdminPmi: () => adminPmiQueries.getAllAdminPmi(),

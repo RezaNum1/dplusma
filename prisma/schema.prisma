@@ -18,6 +18,7 @@ model Pendonor {
   password  String  @db.VarChar(20)
   occupation  String  @db.VarChar(100)
   identifier  String  @db.VarChar(255)
+  fcm_token String  @db.VarChar(255)
   pendonorDetail  PendonorDetail?
   activity  Activity[]
   createdAt DateTime  @default(now())

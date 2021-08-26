@@ -14,6 +14,7 @@ export const typeDefs = gql`
         password: String!
         occupation: String!
         identifier: String
+        fcm_token: String
         pendonorDetails: PendonorDetail
         activitys: [Activity!]!
         createdAt:  Date
@@ -145,6 +146,7 @@ export const typeDefs = gql`
         getAllPendonor: [Pendonor]
         getPendonor(id: String): Pendonor
         getPendonorByIdentifier(identifier: String): Pendonor
+        getAllPendonorByBranch(branchId: String): [Pendonor]
 
         getAllPendonorDetail: [PendonorDetail]
         getPendonorDetail(pendonorId: String): PendonorDetail
@@ -155,9 +157,9 @@ export const typeDefs = gql`
 
         getAllActivity: [Activity]
         getActivity(pendonorId: String): Activity
-        getActivityForInterview: [Activity]
-        getActivityForBloodTest: [Activity]
-        getActivityForDonor: [Activity]
+        getActivityForInterview(branchId: String): [Activity]
+        getActivityForBloodTest(branchId: String): [Activity]
+        getActivityForDonor(branchId: String): [Activity]
 
         getAllAdminPmi: [AdminPmi]
         getAdminPmiById(id: String): AdminPmi
@@ -180,7 +182,8 @@ export const typeDefs = gql`
             email: String!, 
             password: String!, 
             occupation: String, 
-            identifier: String, 
+            identifier: String,
+            fcm_token: String,
             createdAt:  Date, 
             updatedAt:  Date
         ): Pendonor
@@ -191,7 +194,8 @@ export const typeDefs = gql`
             email: String!, 
             password: String!, 
             occupation: String, 
-            identifier: String, 
+            identifier: String,
+            fcm_token: String,
             createdAt:  Date, 
             updatedAt:  Date, 
             riwayatCovid: Boolean, 
@@ -216,7 +220,8 @@ export const typeDefs = gql`
             phoneNumber: String, 
             email: String, 
             occupation: String, 
-            identifier: String
+            identifier: String,
+            fcm_token: String
         ): Pendonor
 
         #PendonorDetail
