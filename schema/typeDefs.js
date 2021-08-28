@@ -77,6 +77,7 @@ export const typeDefs = gql`
         didScheduleTest: Boolean
         didDonor: Boolean
         processState: Boolean
+        setReminder: Boolean
         proofImg: String
         passFormAt: Date
         didScheduleAt: Date
@@ -330,7 +331,8 @@ export const typeDefs = gql`
             passBloodTest: Boolean,
             didScheduleTest: Boolean, 
             didDonor: Boolean, 
-            processState: Boolean, 
+            processState: Boolean,
+            setReminder: Boolean,
             passFormShow: Boolean,
             didScheduleShow: Boolean,
             didInterviewShow: Boolean,
@@ -365,7 +367,8 @@ export const typeDefs = gql`
             passBloodTest: Boolean,
             didScheduleTest: Boolean,
             didDonor: Boolean, 
-            processState: Boolean, 
+            processState: Boolean,
+            setReminder: Boolean,
             passFormShow: Boolean,
             didScheduleShow: Boolean,
             didInterviewShow: Boolean,
@@ -388,6 +391,11 @@ export const typeDefs = gql`
         updateScheduleStatus(
             id: String, 
             didSchedule: Boolean
+        ): Activity
+
+        updateReminder(
+            id: String,
+            setReminder: Boolean
         ): Activity
 
         #AdminPmi

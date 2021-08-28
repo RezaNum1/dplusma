@@ -81,6 +81,7 @@ model Activity {
   didScheduleTest Boolean? @default(false)
   didDonor  Boolean? @default(false)
   processState  Boolean? @default(false)
+  setReminder Boolean? @default(false)
   proofImg  String?  @db.VarChar(255)
   passFormAt  DateTime?
   didScheduleAt DateTime?

@@ -107,6 +107,10 @@ export const resolvers = {
             const updateOne = await activityQueries.updateScheduleStatus(cast)
             return updateOne
         },
+        updateReminder: async(_, cast) => {
+            const updateOne = await activityQueries.updateReminder(cast)
+            return updateOne
+        },
 
         // -------- AdminPmi
         addAdminPmi: async(_, cast) => {

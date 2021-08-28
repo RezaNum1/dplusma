@@ -63,6 +63,7 @@ module.exports = {
                 didScheduleTest: cast.didScheduleTest,
                 didDonor: cast.didDonor,
                 processState: cast.processState,
+                setReminder: cast.setReminder,
                 proofImg: cast.proofImg,
                 passFormAt: cast.passFormAt,
                 didScheduleAt: cast.didScheduleAt,
@@ -95,6 +96,7 @@ module.exports = {
                 didScheduleTest: cast.didScheduleTest,
                 didDonor: cast.didDonor,
                 processState: cast.processState,
+                setReminder: cast.setReminder,
                 proofImg: cast.proofImg,
                 passFormAt: cast.passFormAt,
                 didScheduleAt: cast.didScheduleAt,
@@ -118,6 +120,16 @@ module.exports = {
             data: {
                 didSchedule: cast.didSchedule,
                 queue: `${result[0]["count"] + 1}`
+            }
+        })
+    },
+    updateReminder: async function updateReminder(cast) {
+        return await prisma.activity.update({
+            where: {
+                id: cast.id
+            },
+            data: {
+                setReminder: cast.setReminder
             }
         })
     }
