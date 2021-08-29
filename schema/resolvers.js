@@ -186,6 +186,11 @@ export const resolvers = {
             return prisma.jadwal.findMany({
                 where: { branchId: parent.id, open: true }
             })
+        },
+        activitys: (parent, args, context) => {
+            return prisma.activity.findMany({
+                where: { branchId: parent.id }
+            })
         }
     },
     AdminPmi: {
