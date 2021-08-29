@@ -139,10 +139,6 @@ export const typeDefs = gql`
         message:String!
     }
 
-    type TotalQueue {
-        count: Int
-    }
-
     type Query {
         getAllPendonor: [Pendonor]
         getPendonor(id: String): Pendonor
@@ -333,14 +329,6 @@ export const typeDefs = gql`
             didDonor: Boolean, 
             processState: Boolean,
             setReminder: Boolean,
-            passFormShow: Boolean,
-            didScheduleShow: Boolean,
-            didInterviewShow: Boolean,
-            passInterviewShow: Boolean,
-            didBloodTestShow: Boolean,
-            passBloodTestShow: Boolean,
-            didScheduleTestShow: Boolean,
-            didDonorShow: Boolean,
             proofImg: String,
             passFormAt: Date,
             didScheduleAt: Date,
@@ -369,14 +357,6 @@ export const typeDefs = gql`
             didDonor: Boolean, 
             processState: Boolean,
             setReminder: Boolean,
-            passFormShow: Boolean,
-            didScheduleShow: Boolean,
-            didInterviewShow: Boolean,
-            passInterviewShow: Boolean,
-            didBloodTestShow: Boolean,
-            passBloodTestShow: Boolean,
-            didScheduleTestShow: Boolean,
-            didDonorShow: Boolean,
             proofImg: String, 
             passFormAt: Date, 
             didScheduleAt: Date,
